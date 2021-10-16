@@ -13,6 +13,6 @@ class SocialController extends Controller
     }
 
     public function callback($social){
-        
+
     }
 }
