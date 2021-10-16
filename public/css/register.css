@@ -1,0 +1,159 @@
+@font-face {
+    src: url(../fonts/AndadaPro-Bold.ttf);
+    font-family: Andada;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    /*font-family: Andada, sans-serif;*/
+    text-decoration: none!important;
+}
+.login{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    min-height: 50vh;
+    display: block;
+    overflow: hidden;
+    z-index:2;
+}
+.login .showcase {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    margin-top: 5vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    box-shadow: 0 0 15px #323232;
+}
+.login video{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.7;
+}
+.showcase header{
+    position: relative;
+    padding: 30px 50px;
+    color: #fff;
+}
+.login .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    mix-blend-mode: overlay;
+}
+.showcase header h2{
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 32px;
+}
+.showcase .logo .image{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: -10px;
+    transition: 1s;
+}
+.showcase .logo .image:hover{
+    transform: rotate(360deg);
+}
+.showcase .toggle .text-label{
+    font-size: 18px;
+}
+.showcase .toggle .forgot {
+    float: right;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+}
+.showcase .toggle .forgot:hover{
+    color: #0047de;
+}
+.showcase .toggle button{
+    background-color: #ff3366;
+    outline: #ff3366;
+    border: #ff3366;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.showcase .toggle button:hover{
+    background-color: #ee0740;
+    letter-spacing: 3px;
+}
+.showcase .or {
+    margin: 30px 0;
+}
+.showcase .or span{
+    background-color: #ff3366;
+    padding: 10px 13px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.showcase .social {
+    text-align: center;
+}
+.showcase .social a{
+    list-style-type: none;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px 15px;
+    width: 31%;
+    text-align: left;
+    margin-right: 2%;
+    border-radius: 5px;
+}
+.showcase .social i{
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px dashed #fff;
+}
+.showcase .social a:nth-child(1){
+    background-color: #37bb00;
+}
+.showcase .social a:nth-child(2){
+    background-color: #055bf1;
+}
+.showcase .social a:nth-child(3){
+    background-color: #ff001e;
+}
+.login .design{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    color: #fff;
+    text-align: center;
+    bottom: 3vh;
+}
+.showcase .toggle .loginNow {
+    letter-spacing: 1px;
+}
+.showcase .toggle .loginNow a{
+    color: #fff;
+    transition: 0.5s;
+}
+.showcase .toggle .loginNow a:hover{
+    color: crimson;
+    font-weight: 500;
+    text-shadow: 0 0 10px crimson;
+}
+.showcase .toggle .error {
+    color: #fff;
+    position: absolute;
+    right: 30px;
+    margin-top: 80px;
+}
