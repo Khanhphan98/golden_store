@@ -29,6 +29,8 @@ Route::group(['middleware' => 'checkUserLogin'], function() {
 // Rest
 Route::post('/login', 'Rest\UserCtrl@login');
 Route::post('/register', 'Rest\UserCtrl@register');
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
 
 Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     Route::post('logout', 'Rest\UserCtrl@logout')->name('logout');

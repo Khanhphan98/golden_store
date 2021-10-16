@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('status')->default('AVAILABLE');
             $table->tinyInteger('is_admin')->default(0);
             $table->string('password');
+            $table->string('provider');
+            $table->string('provider_id');
             $table->rememberToken();
             $table->timestamps();
         });
