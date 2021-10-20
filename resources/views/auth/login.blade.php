@@ -65,11 +65,11 @@
                                         <i class="fa fa-user-plus"></i>
                                         <span>Sign up</span>
                                     </a>
-                                    <a href="">
+                                    <a href="{{ url('') }}/auth/redirect/facebook">
                                         <i class="fab fa-facebook-f"></i>
                                         <span>Facebook</span>
                                     </a>
-                                    <a href="">
+                                    <a href="{{ url('') }}/auth/redirect/google">
                                         <i class="fab fa-google-plus-g"></i>
                                         <span>Google</span>
                                     </a>
