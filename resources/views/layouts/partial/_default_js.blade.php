@@ -14,3 +14,17 @@
 <script src="{{url('')}}/js/plugin/lodash.js"></script>
 {{-- moment --}}
 <script src="{{url('')}}/js/plugin/moment.js"></script>
+
+{{-- startbootstrap --}}
+<script src="{{url('')}}/js/plugin/moment.js"></script>
+{{-- Bootstrap core JavaScript --}}
+<script src="{{url('')}}/vendor/jquery/jquery.min.js"></script>
+{{-- Core plugin JavaScript --}}
+<script src="{{url('')}}/vendor/jquery-easing/jquery.easing.min.js"></script>
+{{--Custom scripts for all pages--}}
+<script src="{{url('')}}/js/demo/sb-admin-2.min.js"></script>
+{{-- Page level plugins --}}
+<script src="{{url('')}}/vendor/chart.js/Chart.min.js"></script>
+{{-- Page level custom scripts --}}
+{{--<script src="{{url('')}}/js/demo/chart-area-demo.js"></script>--}}
+{{--<script src="{{url('')}}/js/demo/chart-pie-demo.js"></script>--}}

@@ -15,4 +15,11 @@ class RenderViewController extends Controller
         return view('auth.register');
     }
 
+    public function items() {
+        return view('products.items');
+    }
+
+    public function renderModal($modal) {
+        return view('Modal.' . $modal);
+    }
 }

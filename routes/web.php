@@ -32,6 +32,16 @@ Route::post('/register', 'Rest\UserCtrl@register');
 Route::get('/auth/redirect/{provider}', 'SocialController@redirectToProvider');
 Route::get('/callback/{provider}', 'SocialController@handleProviderCallback');
 
+Route::group(['prefix' => 'render', 'middleware' => 'auth'], function () {
+   Route::get('items', 'RenderView\RenderViewController@items')->name('items');
+
+   Route::get('modal/{modalName}', 'RenderView\RenderViewController@renderModal');
+});
+
 Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     Route::post('logout', 'Rest\UserCtrl@logout')->name('logout');
+
+    // Product
+    Route::get('listItem', 'Rest\ProductsCtrl@itemsAll')->name('listItem');
+    Route::post('createItem', 'Rest\ProductsCtrl@createItem')->name('createItem');
 });
