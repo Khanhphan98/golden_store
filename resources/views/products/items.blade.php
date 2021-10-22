@@ -12,7 +12,7 @@
 @section('content')
 <div ng-controller="itemCtrl">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Product</h1>
+        <h1 class="h3 mb-0 text-gray-800">Sản phẩm</h1>
         <button ng-click="action.showCreateItemModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-plus fa-sm text-white-50"></i> Create</button>
     </div>
@@ -41,8 +41,7 @@
                                 <th scope="col">Kích thước</th>
                                 <th scope="col">Loại sản phẩm</th>
                                 <th scope="col">Thương hiệu</th>
-                                <th scope="col">Giới tính</th>
-                                <th scope="col">Mô tả</th>
+                                <th scope="col">Phương thức</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,8 +54,14 @@
                                     <td>@{{ item.size }}</td>
                                     <td>@{{ item.category }}</td>
                                     <td>@{{ item.brand }}</td>
-                                    <td>@{{ item.itemSex }}</td>
-                                    <td>@{{ item.itemNote }}</td>
+                                    <td>
+                                        <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

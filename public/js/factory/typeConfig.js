@@ -88,6 +88,10 @@ ngApp.factory('$typeConfig', function ($rootScope, $http, $httpParamSerializer) 
         typePassword: {
             show: 'text',
             hide: 'password'
+        },
+        configStatus: {
+            '0': 'Hoạt động',
+            '1': 'Tạm dừng'
         }
     };
 

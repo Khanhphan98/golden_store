@@ -16,7 +16,6 @@ ngApp.controller('itemCtrl', function ($scope, $typeConfig, $itemService) {
 
     $scope.action = {
         showCreateItemModal: function () {
-            console.log(123);
             $($scope.domItemModal).modal('show');
         },
         closeModal: function () {

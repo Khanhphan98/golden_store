@@ -19,6 +19,14 @@ class RenderViewController extends Controller
         return view('products.items');
     }
 
+    public function category() {
+        return view('categories.categories');
+    }
+
+    public function brand() {
+        return view('brands.brands');
+    }
+
     public function renderModal($modal) {
         return view('Modal.' . $modal);
     }

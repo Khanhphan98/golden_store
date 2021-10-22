@@ -44,4 +44,8 @@ class User extends Authenticatable
             return $query->where('email', $email);
         }
     }
+
+    public function brands(){
+        return $this->belongsTo('App\Model\Brand');
+    }
 }

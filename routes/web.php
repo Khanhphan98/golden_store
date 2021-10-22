@@ -33,9 +33,15 @@ Route::get('/auth/redirect/{provider}', 'SocialController@redirectToProvider');
 Route::get('/callback/{provider}', 'SocialController@handleProviderCallback');
 
 Route::group(['prefix' => 'render', 'middleware' => 'auth'], function () {
-   Route::get('items', 'RenderView\RenderViewController@items')->name('items');
+    // items
+    Route::get('items', 'RenderView\RenderViewController@items')->name('items');
 
-   Route::get('modal/{modalName}', 'RenderView\RenderViewController@renderModal');
+   // categories
+    Route::get('category', 'RenderView\RenderViewController@category')->name('category');
+   // brands
+    Route::get('brand', 'RenderView\RenderViewController@brand')->name('brand');
+
+    Route::get('modal/{modalName}', 'RenderView\RenderViewController@renderModal');
 });
 
 Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
@@ -44,4 +50,8 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     // Product
     Route::get('listItem', 'Rest\ProductsCtrl@itemsAll')->name('listItem');
     Route::post('createItem', 'Rest\ProductsCtrl@createItem')->name('createItem');
+
+    // Brand
+    Route::get('listBrand', 'Rest\BrandCtrl@listBrand')->name('listBrand');
+    Route::post('createBrand', 'Rest\BrandCtrl@createBrand')->name('createBrand');
 });
