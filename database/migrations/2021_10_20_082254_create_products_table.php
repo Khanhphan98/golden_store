@@ -21,11 +21,11 @@ class CreateProductsTable extends Migration
             $table->integer('oldPrice')->nullable();
             $table->string('size')->nullable();
             $table->integer('countItems')->default(0);
-            $table->string('category')->nullable();
-            $table->string('brand')->nullable();
             $table->string('itemSex')->nullable();
             $table->string('itemNote')->nullable();
             $table->string('itemImage')->nullable();
+            $table->integer('category_id');
+            $table->integer('brand_id');
             $table->timestamps();
         });
     }

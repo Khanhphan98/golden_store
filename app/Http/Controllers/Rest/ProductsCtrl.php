@@ -31,11 +31,11 @@ class ProductsCtrl extends Controller
             $product->oldPrice = $request->input('oldPrice', '');
             $product->size = $request->input('size', 0);
             $product->countItems = $request->input('countItems', '');
-            $product->category = $request->input('category', '');
-            $product->brand = $request->input('brand', '');
             $product->itemSex = $request->input('itemSex', '');
             $product->itemNote = $request->input('itemNote', '');
             $product->itemImage = $request->input('itemImage', '');
+            $product->category_id = $request->input('category_id');
+            $product->brand = $request->input('brand_id');
             $product->save();
 
             $productID = DB::getPdo()->lastInsertId();
@@ -55,11 +55,13 @@ class ProductsCtrl extends Controller
         $validator = Validator::make($data->all(), [
             'itemName' => 'required',
             'newPrice' => 'required',
-            'countItems' => 'required'
+            'countItems' => 'required',
+            'category_id' => 'required',
         ], [
             'itemName.required' => 'Name item is required',
             'newPrice.required' => 'Price Item is required',
-            'countItems.required' => 'Count Item is required'
+            'countItems.required' => 'Count Item is required',
+            'category_id.required' => 'Category ID is required'
         ]);
 
         return $validator;

@@ -42,7 +42,9 @@
                                         <td>1</td>
                                         <td>@{{ value.nameBrand }}</td>
                                         <td>@{{ action.checkStatus(value.status) }}</td>
-                                        <td>@{{ value.notes }}</td>
+                                        <td class="wrapper-content">
+                                            <p>@{{ value.notes }}</p>
+                                        </td>
                                         <td>
                                             <button class="btn btn-success" ng-click="action.showEditBrandModal()">
                                                 <i class="fa fa-edit"></i>

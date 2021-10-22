@@ -1,0 +1,9 @@
+.wrapper-content {
+    width: 400px;
+}
+.wrapper-content  p {
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

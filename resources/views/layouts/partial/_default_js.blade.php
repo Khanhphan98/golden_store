@@ -14,6 +14,8 @@
 <script src="{{url('')}}/js/plugin/lodash.js"></script>
 {{-- moment --}}
 <script src="{{url('')}}/js/plugin/moment.js"></script>
+{{-- parsley --}}
+<script src="{{url('')}}/js/plugin/parsley/parsley.min.js"></script>
 
 {{-- startbootstrap --}}
 <script src="{{url('')}}/js/plugin/moment.js"></script>

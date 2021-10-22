@@ -3,6 +3,7 @@
 @section('myJs')
     {{--  Service  --}}
     <script src="{{ url('') }}/js/factory/service/itemService.js"></script>
+    <script src="{{ url('') }}/js/factory/service/brandService.js"></script>
     {{--  Directive  --}}
     <script src="{{ url('') }}/js/directives/modal/createItemModal.js"></script>
     {{--  Ctrl  --}}

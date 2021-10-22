@@ -14,11 +14,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="newPrice">Giá mới</label>
-                            <input type="text" class="form-control" id="newPrice" ng-model="data.newPrice" placeholder="Giá mới">
+                            <input type="number" class="form-control" id="newPrice" ng-model="data.newPrice" placeholder="Giá mới">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="oldPrice">Giá cũ</label>
-                            <input type="text" class="form-control" id="oldPrice" ng-model="data.oldPrice" placeholder="Giá cũ">
+                            <input type="number" class="form-control" id="oldPrice" ng-model="data.oldPrice" placeholder="Giá cũ">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="size">Kích thước</label>
@@ -33,8 +33,11 @@
                             <input type="text" class="form-control" id="category" ng-model="data.category" placeholder="Loại sản phẩm">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="brand">Nhãn hiệu</label>
-                            <input type="text" class="form-control" id="brand" ng-model="data.brand" placeholder="Nhãn hiệu">
+                            <label for="brand">Thương hiệu</label>
+                            <select name="brand" id="brand" class="form-control" ng-model="data.brand">
+                                <option value="">-- Chọn thương hiệu --</option>
+                                <option ng-repeat="(key, value) in data.listBrand" value="@{{ key }}">@{{ value.nameBrand }}</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="itemSex">Giới tính</label>

@@ -54,4 +54,8 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     // Brand
     Route::get('listBrand', 'Rest\BrandCtrl@listBrand')->name('listBrand');
     Route::post('createBrand', 'Rest\BrandCtrl@createBrand')->name('createBrand');
+
+    // Category
+    Route::get('/listCategory', 'Rest\CategoriesCtrl@listCategory')->name('listCategory');
+    Route::post('/createCategory', 'Rest\CategoriesCtrl@createCategory')->name('createCategory');
 });
