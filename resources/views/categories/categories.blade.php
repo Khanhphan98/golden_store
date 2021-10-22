@@ -26,31 +26,40 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Loại sản phẩm</th>
-                                    <th scope="col">Trạng thái</th>
-                                    <th scope="col">Phương thức</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="(key, value) in data.listCategories">
-                                    <td>@{{ key+1 }}</td>
-                                    <td>@{{ action.formatCategory(value.nameCategory, value.path) }}</td>
-                                    <td>@{{ action.checkStatus(value.status) }}</td>
-                                    <td>
-                                        <button class="btn btn-success" ng-click="action.showEditBrandModal()">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Loại sản phẩm</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Phương thức</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in data.listCategories">
+                                <td>@{{ action.showOrder(key) }}</td>
+                                <td>@{{ action.formatCategory(value.nameCategory, value.path) }}</td>
+                                <td>@{{ action.checkStatus(value.status) }}</td>
+                                <td>
+                                    <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <div paging page="data.paging.current_page" page-size="data.paging.per_page" total="data.paging.total"
+                                     paging-action="action.changePage(page)">
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

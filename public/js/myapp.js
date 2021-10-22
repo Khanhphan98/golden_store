@@ -1,1 +1,1 @@
-var ngApp = angular.module('ngApp', []);
+var ngApp = angular.module('ngApp', ['bw.paging']);

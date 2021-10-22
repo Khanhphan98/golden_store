@@ -15,4 +15,8 @@ class Categories extends Model
     public function products () {
         return  $this->hasMany('App\Model\Products', 'category_id');
     }
+
+    public function scopeOrderByPath($query){
+        return $query->orderBy('path', 'asc');
+    }
 }

@@ -9,9 +9,13 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
 
     $scope.process = {
         listCategories: function () {
-            $categoryService.action.listCategory().then((res) => {
-                $scope.data.listCategories = res.data.category;
-                console.log($scope.data.listCategories);
+            let params = $categoryService.data.listCategory($scope.data.page, $scope.data.perPage, $scope.data.keyword);
+            $categoryService.action.listCategory(params).then((res) => {
+                console.log(res);
+                $scope.data.listCategories = res.data.category.data;
+                $scope.data.paging.current_page = res.data.category.current_page;
+                $scope.data.paging.per_page = res.data.category.per_page;
+                $scope.data.paging.total = res.data.category.total;
             }).catch((error) => {
                console.log(error);
             });
@@ -43,6 +47,13 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
                 }
             }
             return trim + ' ' + nameCategory;
+        },
+        changePage: (page) => {
+            $scope.data.page = page;
+            $scope.process.listCategories();
+        },
+        showOrder: (index) => {
+            return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
         }
     }
 

@@ -5,6 +5,14 @@ ngApp.factory('$categoryService', function ($rootScope, $http, $httpParamSeriali
     };
 
     // data
+    service.data.listCategory = function (page, perPage, keyword) {
+        return {
+            page: page,
+            perPage: perPage || 15,
+            keyword: keyword || "",
+        }
+    }
+
     service.data.createCategory = function (nameCategory, parentId, status) {
         return {
             nameCategory: nameCategory,
@@ -16,8 +24,8 @@ ngApp.factory('$categoryService', function ($rootScope, $http, $httpParamSeriali
 
     // action
     // lít brand
-    service.action.listCategory = function () {
-        let url = SiteUrl + '/rest/listCategory';
+    service.action.listCategory = function (params) {
+        let url = SiteUrl + '/rest/listCategory?' + $httpParamSerializer(params);
         return $http.get(url);
     }
 

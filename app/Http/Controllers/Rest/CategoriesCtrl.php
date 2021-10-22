@@ -10,8 +10,24 @@ use Monolog\Handler\AmqpHandler;
 
 class CategoriesCtrl extends Controller
 {
-    public function listCategory(Categories $categories) {
-        $category = Categories::orderBy('path', 'asc')->get();
+    public function listCategory(Categories $categories, Request $request) {
+        $validator = Validator::make($request->all(), [
+            'page' => 'required',
+            'perPage' => 'required',
+        ], [
+            'page.required' => 'Page is required',
+            'perPage.required' => 'Per page is required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $page = (int) $request->input('page', 1);
+        $perPage = $request->input('perPage', 10);
+        $keyword = $request->input('keyword' , '');
+
+        $category = $categories->orderByPath()->paginate($perPage);
         return response()->json(['category' => $category], 200);
     }
 

@@ -26,9 +26,8 @@ class BrandCtrl extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        DB::beginTransaction();
-
-        try {
+//        DB::beginTransaction();
+//        try {
             $brand->nameBrand = $request->input('nameBrand');
             $brand->status = $request->input('status', 0);
             $brand->notes = $request->input('notes');
@@ -36,9 +35,9 @@ class BrandCtrl extends Controller
             DB::commit();
 
             return response()->json(['status' => true], 200);
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            return response()->json(['errors' => "Can't create brand"]);
-        }
+//        } catch (\Throwable $e) {
+//            DB::rollback();
+//            return response()->json(['errors' => "Can't create brand"], 422);
+//        }
     }
 }
