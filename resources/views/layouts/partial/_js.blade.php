@@ -18,6 +18,8 @@
 <script src="{{ url('') }}/js/directives/myFileRead.js"></script>
 <script src="{{ url('') }}/js/directives/myHeight.js"></script>
 <script src="{{ url('') }}/js/directives/stringToNumber.js"></script>
+<script src="{{ url('') }}/js/directives/ngFileModel.js"></script>
+
 
 <!--default factory-->
 <script src="{{ url('') }}/js/factory/apply.js"></script>

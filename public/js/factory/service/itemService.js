@@ -7,7 +7,8 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
     // data
 
     //create item
-    service.data.createItem = function (itemName, newPrice, oldPrice, size, countItems, category_id, brand, itemSex, itemNote, itemImage) {
+    service.data.createItem = function (itemName, newPrice, oldPrice, size, countItems,
+                                        category_id, brand, itemSex, itemNote, itemImage, status) {
         var params = new FormData();
         params.append('itemName', itemName);
         params.append('newPrice', newPrice);
@@ -19,6 +20,7 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
         params.append('itemSex', itemSex || '');
         params.append('itemNote', itemNote || '');
         params.append('itemImage', itemImage || '');
+        params.append('status', status || '0');
         return params;
     }
     service.data.listItem = function (page, perPage, keyword) {

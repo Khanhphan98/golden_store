@@ -96,6 +96,30 @@ ngApp.factory('$typeConfig', function ($rootScope, $http, $httpParamSerializer) 
         configSex: {
             0: 'Nam',
             1: 'Nữ'
+        },
+        configSize: {
+            0: {
+                sizeName: 'Size S',
+                value: 8,
+            },
+            1: {
+                sizeName: 'Size M',
+                value: 9,
+            },
+            2: {
+                sizeName: 'Size L',
+                value: 10,
+            },
+            3: {
+                sizeName: 'Size Xl',
+                value: 11,
+            },
+            4: {
+                sizeName: 'Size XXl',
+                value: 12,
+            },
+
+
         }
     };
 

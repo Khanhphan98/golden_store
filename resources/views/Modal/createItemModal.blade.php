@@ -21,8 +21,11 @@
                             <input type="number" class="form-control" id="oldPrice" ng-model="data.oldPrice" placeholder="Giá cũ">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="size">Kích thước</label>
-                            <input type="text" class="form-control" id="size" ng-model="data.size" placeholder="Kích thước">
+                            <label for="size">Kích thước</label>c
+                            <select name="size" id="size" class="form-control" ng-model="data.size">
+                                <option value="">-- Kích thước --</option>
+                                <option ng-repeat="(key, size) in data.listSizes" value="@{{ size.value }}">@{{ size.value }}</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="countItems">Số lượng</label>
@@ -51,14 +54,15 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="itemNote">Mô tả</label>
-                            <textarea name="itemNote" ng-model="data.itemNote" id="" cols="30" rows="10"></textarea>
+                            <textarea name="itemNote" class="form-control" ng-model="data.itemNote" id="itemNote" cols="1" rows="5"></textarea>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="itemImage">Hình ảnh</label>
                             <label for="avatar" style="background-color: #579ddb;color: white;padding: 0.5rem;font-family: sans-serif;cursor: pointer;margin-top: 1rem;border-radius: 5px;">
                                 <input accept="image/png,image/jpeg,image/jpg" onchange="readURL(this)" ng-model="data.avatar" name="avatar" id="avatar" type="file" style="display: none;"/>
-                                <i class="fa fa-upload"></i> Chọn file
+                                Chọn file
                             </label>
+                            <img style="border-radius: 50%" height="100px" width="100px" ng-src="@{{ action.loadImage(data.avatar) }}" id="image_preview">
                         </div>
 
                     </div>

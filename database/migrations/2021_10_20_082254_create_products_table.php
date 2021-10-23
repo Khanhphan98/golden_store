@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('itemImage')->nullable();
             $table->integer('category_id');
             $table->integer('brand_id');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

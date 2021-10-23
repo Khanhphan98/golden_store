@@ -54,6 +54,7 @@ class ProductsCtrl extends Controller
             $product->itemImage = $request->input('itemImage', '');
             $product->category_id = $request->input('category_id');
             $product->brand_id = $request->input('brand_id');
+            $product->status = $request->input('status', 0);
             $product->save();
 
             $productID = DB::getPdo()->lastInsertId();
@@ -98,6 +99,7 @@ class ProductsCtrl extends Controller
         $products->itemImage = $request->input('itemImage', '');
         $products->category_id = $request->input('category_id');
         $products->brand_id = $request->input('brand_id');
+        $product->status = $request->input('status', 0);
         $products->save();
     }
 

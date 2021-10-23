@@ -39,8 +39,6 @@
                                 <th scope="col">Tên sản phẩm</th>
                                 <th scope="col">Mã sản phẩm</th>
                                 <th scope="col">Giá tiền</th>
-                                <th scope="col">Giá cũ</th>
-                                <th scope="col">Kích thước</th>
                                 <th scope="col">Loại sản phẩm</th>
                                 <th scope="col">Thương hiệu</th>
                                 <th scope="col">Phương thức</th>
@@ -48,12 +46,10 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="(key, item) in data.listItems">
-                                    <th scope="row">1</th>
+                                    <th scope="row">@{{ action.showOrder(key) }}</th>
                                     <td>@{{ item.itemName }}</td>
                                     <td>@{{ item.itemCode }}</td>
                                     <td>@{{ item.newPrice }}</td>
-                                    <td>@{{ item.oldPrice }}</td>
-                                    <td>@{{ item.size }}</td>
                                     <td>@{{ item.nameCategory }}</td>
                                     <td>@{{ item.nameBrand }}</td>
                                     <td>

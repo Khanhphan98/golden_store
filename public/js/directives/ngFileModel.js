@@ -12,13 +12,13 @@ ngApp.directive('ngFileModel', ['$parse', function ($parse) {
 
                 angular.forEach(element[0].files, function (item) {
                     var value = {
-                        // File Name 
+                        // File Name
                         name: item.name,
-                        //File Size 
+                        //File Size
                         size: item.size,
-                        //File URL to view 
+                        //File URL to view
                         url: URL.createObjectURL(item),
-                        // File Input Value 
+                        // File Input Value
                         _file: item
                     };
                     values.push(value);
@@ -33,9 +33,6 @@ ngApp.directive('ngFileModel', ['$parse', function ($parse) {
                 document.getElementsByClassName("selectData").value = "";
                 $('.selectData').val('');
             });
-
-
-
         }
     };
 }]);

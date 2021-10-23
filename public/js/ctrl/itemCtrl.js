@@ -26,6 +26,7 @@ ngApp.controller('itemCtrl', function ($scope, $typeConfig, $itemService) {
         },
         closeModal: function () {
             $($scope.domItemModal).modal('hide');
+            $scope.process.listItem();
         },
         changePage: (page) => {
             $scope.data.page = page;

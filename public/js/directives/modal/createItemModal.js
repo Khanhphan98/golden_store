@@ -1,4 +1,4 @@
-ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify,
+ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFile,
                                              $itemService, $brandService, $categoryService, $typeConfig) {
     var templateUrl = SiteUrl + "/render/modal/createItemModal";
     var restrict = 'E';
@@ -12,7 +12,8 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify,
         scope.data = {
             listBrand: [],
             listCategory: [],
-            listSex: []
+            listSex: [],
+            listSizes: []
         }
 
         scope.process = {
@@ -33,10 +34,14 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify,
             listSexs: () => {
                 scope.data.listSex = $typeConfig.configSex;
             },
+            listSize: () => {
+                scope.data.listSizes = $typeConfig.configSize;
+            },
             runModal: () => {
                 scope.process.listBrand();
                 scope.process.listCategories();
                 scope.process.listSexs();
+                scope.process.listSize();
             }
         }
 
@@ -45,15 +50,17 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify,
                 let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
                 scope.data.size, scope.data.countItems, scope.data.category, scope.data.brand,
                     scope.data.itemSex, scope.data.itemNote, scope.data.avatar);
-                console.log(params);
                 $itemService.action.createItem(params).then((res) => {
+                    scope.retFunc();
                     console.log(res);
                 }).catch((e) => {
                    console.log(e);
                 });
 
             },
-
+            loadImage: function (params) {
+                return $myFile.avatar(params);
+            },
         };
 
         scope.process.runModal();

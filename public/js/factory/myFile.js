@@ -1,4 +1,4 @@
-ngApp.factory('$myFile', function ($rootScope, $httpParamSerializer, $settingService, $typeConfig, $http) {
+ngApp.factory('$myFile', function ($rootScope, $httpParamSerializer, $typeConfig, $http) {
     var myFile = {
     	recordingAddress: '',
         avatar: function (file) {
@@ -6,14 +6,6 @@ ngApp.factory('$myFile', function ($rootScope, $httpParamSerializer, $settingSer
                 data: file
             };
             return url = SiteUrl + "/file/avatar?" + $httpParamSerializer(params);
-        },
-        getSettingConf: function () {
-        	$settingService.action.info($typeConfig.CONST_SETTING_PEXIP).then(function(resData){
-                var value = JSON.parse(resData.data[0].value);
-                myFile.recordingAddress = value.recordingAddress;
-        	}).catch(function(err){
-        		/*console.log(err);*/
-        	});
         },
 
         fileAttachment: function (file,fileName) {
@@ -38,7 +30,7 @@ ngApp.factory('$myFile', function ($rootScope, $httpParamSerializer, $settingSer
             };
             return SiteUrl + "/rest/meeting/downloadAttachment?" + $httpParamSerializer(params);
         },
-   
+
         confFile: function(file){
         	return myFile.recordingAddress + '/responseFile/file?data='+ file;
         },
@@ -51,6 +43,5 @@ ngApp.factory('$myFile', function ($rootScope, $httpParamSerializer, $settingSer
             return SiteUrl + '/file/recording/download?' + $httpParamSerializer(params);
         }
     };
-    myFile.getSettingConf();
     return myFile;
 });
