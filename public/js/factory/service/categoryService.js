@@ -29,6 +29,12 @@ ngApp.factory('$categoryService', function ($rootScope, $http, $httpParamSeriali
         return $http.get(url);
     }
 
+    // selectListCategory
+    service.action.selectListCategory = function () {
+        let url = SiteUrl + '/rest/selectListCategory';
+        return $http.get(url);
+    }
+
     // create brand
     service.action.createCategory = function (params) {
         let url = SiteUrl + '/rest/createCategory';

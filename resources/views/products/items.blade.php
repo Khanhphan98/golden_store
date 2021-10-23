@@ -4,6 +4,7 @@
     {{--  Service  --}}
     <script src="{{ url('') }}/js/factory/service/itemService.js"></script>
     <script src="{{ url('') }}/js/factory/service/brandService.js"></script>
+    <script src="{{ url('') }}/js/factory/service/categoryService.js"></script>
     {{--  Directive  --}}
     <script src="{{ url('') }}/js/directives/modal/createItemModal.js"></script>
     {{--  Ctrl  --}}
@@ -53,8 +54,8 @@
                                     <td>@{{ item.newPrice }}</td>
                                     <td>@{{ item.oldPrice }}</td>
                                     <td>@{{ item.size }}</td>
-                                    <td>@{{ item.category }}</td>
-                                    <td>@{{ item.brand }}</td>
+                                    <td>@{{ item.nameCategory }}</td>
+                                    <td>@{{ item.nameBrand }}</td>
                                     <td>
                                         <button class="btn btn-success" ng-click="action.showEditBrandModal()">
                                             <i class="fa fa-edit"></i>
@@ -66,6 +67,15 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <div paging page="data.paging.current_page" page-size="data.paging.per_page" total="data.paging.total"
+                                     paging-action="action.changePage(page)">
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

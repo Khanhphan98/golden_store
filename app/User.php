@@ -45,7 +45,4 @@ class User extends Authenticatable
         }
     }
 
-    public function brands(){
-        return $this->belongsTo('App\Model\Brand');
-    }
 }

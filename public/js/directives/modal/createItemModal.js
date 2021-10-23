@@ -1,4 +1,5 @@
-ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $itemService, $brandService) {
+ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify,
+                                             $itemService, $brandService, $categoryService, $typeConfig) {
     var templateUrl = SiteUrl + "/render/modal/createItemModal";
     var restrict = 'E';
     var scope = {
@@ -10,6 +11,8 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $item
 
         scope.data = {
             listBrand: [],
+            listCategory: [],
+            listSex: []
         }
 
         scope.process = {
@@ -20,8 +23,20 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $item
                     console.error(err);
                 });
             },
+            listCategories: () => {
+                $categoryService.action.selectListCategory().then((res) => {
+                    scope.data.listCategory = res.data.category;
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            listSexs: () => {
+                scope.data.listSex = $typeConfig.configSex;
+            },
             runModal: () => {
                 scope.process.listBrand();
+                scope.process.listCategories();
+                scope.process.listSexs();
             }
         }
 

@@ -31,6 +31,11 @@ class CategoriesCtrl extends Controller
         return response()->json(['category' => $category], 200);
     }
 
+    public function selectListCategory(Categories $categories) {
+        $category = $categories->orderByPath()->get();
+        return response()->json(['category' => $category], 200);
+    }
+
     public function createCategory(Request $request, Categories $category) {
         $validator = Validator::make($request->all(), [
             'nameCategory' => 'required',

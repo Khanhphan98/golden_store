@@ -92,6 +92,10 @@ ngApp.factory('$typeConfig', function ($rootScope, $http, $httpParamSerializer) 
         configStatus: {
             '0': 'Hoạt động',
             '1': 'Tạm dừng'
+        },
+        configSex: {
+            0: 'Nam',
+            1: 'Nữ'
         }
     };
 

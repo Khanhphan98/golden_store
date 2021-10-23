@@ -30,7 +30,10 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="category">Loại sản phẩm</label>
-                            <input type="text" class="form-control" id="category" ng-model="data.category" placeholder="Loại sản phẩm">
+                            <select name="category" id="category" class="form-control" ng-model="data.category">
+                                <option value="">-- Loại sản phẩm --</option>
+                                <option ng-repeat="(key, value) in data.listCategory" value="@{{ value.id }}">@{{ value.nameCategory }}</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="brand">Thương hiệu</label>
@@ -41,11 +44,14 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="itemSex">Giới tính</label>
-                            <input type="text" class="form-control" id="itemSex" ng-model="data.itemSex" placeholder="Giới tính">
+                            <select name="itemSex" id="itemSex" class="form-control" ng-model="data.itemSex">
+                                <option value="">-- Chọn giới tính --</option>
+                                <option ng-repeat="(key, value) in data.listSex" value="@{{ value }}">@{{ value }}</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="itemNote">Mô tả</label>
-                            <input type="text" class="form-control" id="itemNote" ng-model="data.itemNote" placeholder="Mô tả">
+                            <textarea name="itemNote" ng-model="data.itemNote" id="" cols="30" rows="10"></textarea>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="itemImage">Hình ảnh</label>

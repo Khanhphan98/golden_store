@@ -57,5 +57,6 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
 
     // Category
     Route::get('/listCategory', 'Rest\CategoriesCtrl@listCategory')->name('listCategory');
+    Route::get('/selectListCategory', 'Rest\CategoriesCtrl@selectListCategory')->name('selectListCategory');
     Route::post('/createCategory', 'Rest\CategoriesCtrl@createCategory')->name('createCategory');
 });

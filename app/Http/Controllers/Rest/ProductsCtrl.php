@@ -6,11 +6,29 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Products;
 use DB, Validator;
+use App\Model\Brand;
+
 
 class ProductsCtrl extends Controller
 {
-    public function itemsAll(Products $products){
-        $product = $products->all();
+    public function itemsAll(Products $products, Request $request){
+        $validator = Validator::make($request->all(), [
+            'page' => 'required',
+            'perPage' => 'required'
+        ], [
+            'page.required' => 'Page is required',
+            'perPage.required' => 'Per page is required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $page = (int) $request->input('page', 1);
+        $perPage = $request->input('perPage', 10);
+        $keyword = $request->input('keyword' , '');
+
+        $product = $products->fillterProduct()->paginate($perPage);
         return response()->json(['products' => $product], 200);
     }
 
@@ -35,7 +53,7 @@ class ProductsCtrl extends Controller
             $product->itemNote = $request->input('itemNote', '');
             $product->itemImage = $request->input('itemImage', '');
             $product->category_id = $request->input('category_id');
-            $product->brand = $request->input('brand_id');
+            $product->brand_id = $request->input('brand_id');
             $product->save();
 
             $productID = DB::getPdo()->lastInsertId();
@@ -46,7 +64,7 @@ class ProductsCtrl extends Controller
             return response()->json(['Create product is successfully'], 200);
         } catch (\Throwable $e) {
             DB::rollback();
-            return response()->json(['errors' => "Can't create a new item"]);
+            return response()->json(['errors' => $e], 422);
         }
 
     }
@@ -75,11 +93,11 @@ class ProductsCtrl extends Controller
         $products->oldPrice = $request->input('oldPrice', '');
         $products->size = $request->input('size', 0);
         $products->countItems = $request->input('countItems', '');
-        $products->category = $request->input('category', '');
-        $products->brand = $request->input('brand', '');
         $products->itemSex = $request->input('itemSex', '');
         $products->itemNote = $request->input('itemNote', '');
         $products->itemImage = $request->input('itemImage', '');
+        $products->category_id = $request->input('category_id');
+        $products->brand_id = $request->input('brand_id');
         $products->save();
     }
 

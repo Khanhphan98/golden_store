@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('size')->nullable();
             $table->integer('countItems')->default(0);
             $table->string('itemSex')->nullable();
-            $table->string('itemNote')->nullable();
+            $table->text('itemNote')->nullable();
             $table->string('itemImage')->nullable();
             $table->integer('category_id');
             $table->integer('brand_id');
