@@ -48,16 +48,17 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
 
         scope.action = {
             createItem: () => {
-                let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
-                scope.data.size, scope.data.countItems, scope.data.category, scope.data.brand,
-                    scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
-                $itemService.action.createItem(params).then((res) => {
-                    scope.retFunc();
-                    console.log(res);
-                }).catch((e) => {
-                   console.log(e);
-                });
-
+                if ($(scope.formItem).parsley().validate()) {
+                    let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
+                        scope.data.size, scope.data.countItems, scope.data.category, scope.data.brand,
+                        scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
+                    $itemService.action.createItem(params).then((res) => {
+                        scope.retFunc();
+                        console.log(res);
+                    }).catch((e) => {
+                        console.log(e);
+                    });
+                }
             },
             loadImage: function (params) {
                 return $myFile.avatar(params);

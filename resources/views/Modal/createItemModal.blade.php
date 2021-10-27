@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="myModalLabel">Tạo sản phẩm</h5>
             </div>
             <div class="modal-body" style="">
-                <form enctype="multipart/form-data" method="POST" role="form">
+                <form enctype="multipart/form-data" method="POST" role="form" ng-dom="formItem" data-parsley-validate>
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -58,7 +58,10 @@
                             <textarea name="itemNote" class="form-control" ng-model="data.itemNote" id="itemNote" cols="1" rows="5"></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                            <input type='file' ng-file='uploadfiles' multiple>
+                            <label class="btn btn-success btnUpload" for="images">
+                                <i class="fas fa-file-upload"></i> Upload
+                                <input type='file' ng-file='uploadfiles' style="display: none" id="images" multiple>
+                            </label>
                             <div class="images">
                             </div>
                         </div>
