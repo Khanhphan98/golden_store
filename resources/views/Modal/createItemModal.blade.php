@@ -6,7 +6,8 @@
                 <h5 class="modal-title" id="myModalLabel">Tạo sản phẩm</h5>
             </div>
             <div class="modal-body" style="">
-                <form>
+                <form enctype="multipart/form-data" method="POST" role="form">
+                    @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="itemName">Tên sản phẩm</label>
@@ -57,14 +58,10 @@
                             <textarea name="itemNote" class="form-control" ng-model="data.itemNote" id="itemNote" cols="1" rows="5"></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="itemImage">Hình ảnh</label>
-                            <label for="avatar" style="background-color: #579ddb;color: white;padding: 0.5rem;font-family: sans-serif;cursor: pointer;margin-top: 1rem;border-radius: 5px;">
-                                <input accept="image/png,image/jpeg,image/jpg" onchange="readURL(this)" ng-model="data.avatar" name="avatar" id="avatar" type="file" style="display: none;"/>
-                                Chọn file
-                            </label>
-                            <img style="border-radius: 50%" height="100px" width="100px" ng-src="@{{ action.loadImage(data.avatar) }}" id="image_preview">
+                            <input type='file' ng-file='uploadfiles' multiple>
+                            <div class="images">
+                            </div>
                         </div>
-
                     </div>
                 </form>
             </div>

@@ -33,14 +33,15 @@ class ProductsCtrl extends Controller
     }
 
     public function createItem(Products $product, Request $request){
+
         $validator = $this->_validatorItem($request);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        DB::beginTransaction();
-        try {
+//        DB::beginTransaction();
+//        try {
             $itemCode = $this->generateRandomString();
 
             $product->itemName = $request->input('itemName');
@@ -51,7 +52,7 @@ class ProductsCtrl extends Controller
             $product->countItems = $request->input('countItems', '');
             $product->itemSex = $request->input('itemSex', '');
             $product->itemNote = $request->input('itemNote', '');
-            $product->itemImage = $request->input('itemImage', '');
+            $product->itemImage = '';
             $product->category_id = $request->input('category_id');
             $product->brand_id = $request->input('brand_id');
             $product->status = $request->input('status', 0);
@@ -60,13 +61,13 @@ class ProductsCtrl extends Controller
             $productID = DB::getPdo()->lastInsertId();
 
             $this->_updateItem($product, $request, $itemCode, $productID);
-            DB::commit();
+//            DB::commit();
 
             return response()->json(['Create product is successfully'], 200);
-        } catch (\Throwable $e) {
-            DB::rollback();
-            return response()->json(['errors' => $e], 422);
-        }
+//        } catch (\Throwable $e) {
+//            DB::rollback();
+//            return response()->json(['errors' => $e], 422);
+//        }
 
     }
 
@@ -88,6 +89,17 @@ class ProductsCtrl extends Controller
 
     public function _updateItem($product, $request, $itemCode, $productID){
         $products = $product->find($productID);
+        $images = [];
+        if ($request->hasFile('itemImage')) {
+            foreach ($request->file('itemImage') as $value) {
+                $name = $value->getClientOriginalName();
+                $value->move('images', $name);
+                array_push($images, $name);
+            }
+            $products->itemImage = json_decode(json_encode($images),true);
+        } else {
+            $products->itemImage = '';
+        }
         $products->itemName = $request->input('itemName');
         $products->itemCode = $itemCode.$productID;
         $products->newPrice = $request->input('newPrice');
@@ -96,7 +108,6 @@ class ProductsCtrl extends Controller
         $products->countItems = $request->input('countItems', '');
         $products->itemSex = $request->input('itemSex', '');
         $products->itemNote = $request->input('itemNote', '');
-        $products->itemImage = $request->input('itemImage', '');
         $products->category_id = $request->input('category_id');
         $products->brand_id = $request->input('brand_id');
         $product->status = $request->input('status', 0);
@@ -111,5 +122,18 @@ class ProductsCtrl extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return 'TK' . $randomString;
+    }
+
+    private function replaceSymLink($path){
+        if(
+            strpos($path, '../') !== false OR
+            strpos($path, './') !== false OR
+            strpos($path, '.\\') !== false OR
+            strpos($path, '.\\') !== false
+        ){
+            $path = realpath($path);
+        }
+
+        return $path;
     }
 }

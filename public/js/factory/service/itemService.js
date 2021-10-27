@@ -8,18 +8,20 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
 
     //create item
     service.data.createItem = function (itemName, newPrice, oldPrice, size, countItems,
-                                        category_id, brand, itemSex, itemNote, itemImage, status) {
-        var params = new FormData();
+                                        category_id, brand_id, itemSex, itemNote, itemImage, status) {
+        let params = new FormData();
         params.append('itemName', itemName);
         params.append('newPrice', newPrice);
         params.append('oldPrice', oldPrice || '');
         params.append('size', size || '');
         params.append('countItems', countItems || '');
         params.append('category_id', category_id || '');
-        params.append('brand_id', brand || '');
+        params.append('brand_id', brand_id || '');
         params.append('itemSex', itemSex || '');
         params.append('itemNote', itemNote || '');
-        params.append('itemImage', itemImage || '');
+        angular.forEach(itemImage, function(images){
+            params.append('itemImage[]', images || '');
+        });
         params.append('status', status || '0');
         return params;
     }

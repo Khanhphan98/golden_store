@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('myCss')
+    <link href="{{ asset('css/uploadFile.css') }}" rel="stylesheet">
+@endsection()
+
 @section('myJs')
     {{--  Service  --}}
     <script src="{{ url('') }}/js/factory/service/itemService.js"></script>

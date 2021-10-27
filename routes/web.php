@@ -42,6 +42,8 @@ Route::group(['prefix' => 'render', 'middleware' => 'auth'], function () {
     Route::get('brand', 'RenderView\RenderViewController@brand')->name('brand');
 
     Route::get('modal/{modalName}', 'RenderView\RenderViewController@renderModal');
+
+    Route::get('/files', 'Rest\FilesController@files');
 });
 
 Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
@@ -59,4 +61,10 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     Route::get('/listCategory', 'Rest\CategoriesCtrl@listCategory')->name('listCategory');
     Route::get('/selectListCategory', 'Rest\CategoriesCtrl@selectListCategory')->name('selectListCategory');
     Route::post('/createCategory', 'Rest\CategoriesCtrl@createCategory')->name('createCategory');
+
+    Route::post("upload/file", "Rest\FilesController@upload");
+
+    Route::get('file/list','Rest\FilesController@listFiles');
+
+    Route::post("delete/file", 'Rest\FilesController@delete');
 });

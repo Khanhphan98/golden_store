@@ -1,15 +1,17 @@
-ngApp.directive('ngFileModel', ['$parse', function ($parse) {
+ngApp.directive('ngFile', ['$parse', function ($parse) {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
-            var model = $parse(attrs.ngFileModel);
-            var isMultiple = attrs.multiple;
-            var modelSetter = model.assign;
-            element.bind('change', function () {
-                var values = [];
+        link: function(scope, element, attrs) {
+            element.bind('change', function(){
+                $parse(attrs.ngFile).assign(scope,element[0].files)
+                let model = $parse(attrs.ngFile);
+                let isMultiple = attrs.multiple;
+                let modelSetter = model.assign;
+
+                let values = [];
                 scope.imgFile = element[0].files;
                 angular.forEach(element[0].files, function (item) {
-                    var value = {
+                    let value = {
                         // File Name
                         name: item.name,
                         //File Size
@@ -18,12 +20,11 @@ ngApp.directive('ngFileModel', ['$parse', function ($parse) {
                         url: URL.createObjectURL(item),
                         // File Input Value
                         _file: item
-                    };
+                    }
                     values.push(value);
-                });
+                })
                 scope.$apply(function () {
                     if (isMultiple) {
-                        modelSetter(scope, values);
                         for (let i in values) {
                             let images = $('.images');
                             images.prepend('<div class="img" style="background-image: url(\'' + values[i].url + '\');" rel="'+ values[i].url +'"><span>remove</span></div>');
@@ -31,12 +32,8 @@ ngApp.directive('ngFileModel', ['$parse', function ($parse) {
                                 $(this).remove();
                             })
                         }
-                    } else {
-                        modelSetter(scope, values[0]);
                     }
                 });
-                document.getElementsByClassName("selectData").value = "";
-                $('.selectData').val('');
             });
         }
     };

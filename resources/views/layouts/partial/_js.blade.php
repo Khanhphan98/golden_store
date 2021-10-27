@@ -19,6 +19,7 @@
 <script src="{{ url('') }}/js/directives/myHeight.js"></script>
 <script src="{{ url('') }}/js/directives/stringToNumber.js"></script>
 <script src="{{ url('') }}/js/directives/ngFileModel.js"></script>
+<script src="{{ url('') }}/js/directives/ngFile.js"></script>
 
 
 <!--default factory-->

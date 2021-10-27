@@ -13,7 +13,8 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
             listBrand: [],
             listCategory: [],
             listSex: [],
-            listSizes: []
+            listSizes: [],
+            status: 0
         }
 
         scope.process = {
@@ -49,7 +50,7 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
             createItem: () => {
                 let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
                 scope.data.size, scope.data.countItems, scope.data.category, scope.data.brand,
-                    scope.data.itemSex, scope.data.itemNote, scope.data.avatar);
+                    scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
                 $itemService.action.createItem(params).then((res) => {
                     scope.retFunc();
                     console.log(res);
