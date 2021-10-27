@@ -38,7 +38,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label class="text-label" for="email">Email address</label>
-                                            <input id="email" name="email" type="email" class="form-control" value="{{ old('email') }}" required autocomplete="email"
+                                            <input id="email" name="email" type="email" class="form-control" value="{{ old('email') }}" autocomplete="email"
                                                    ng-model="data.email" aria-describedby="emailHelp" placeholder="Enter email" required>
 
                                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
