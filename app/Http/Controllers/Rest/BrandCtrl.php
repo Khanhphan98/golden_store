@@ -10,8 +10,24 @@ use DB;
 
 class BrandCtrl extends Controller
 {
-    public function listBrand(Brand $brand) {
-        $listBrand = $brand->all();
+    public function listBrand(Brand $brand, Request $request) {
+        $validator = Validator::make($request->all(), [
+            'page' => 'required',
+            'perPage' => 'required'
+        ], [
+            'page.required' => 'Page is required',
+            'perPage.required' => 'Per page is required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $page = (int) $request->input('page', 1);
+        $perPage = (int) $request->input('perPage', 10);
+
+        $page > 0 ? $listBrand = $brand->paginate($perPage) : $listBrand = $brand->all();
+
         return response()->json(['status' => true, 'listBrand' => $listBrand], 200);
     }
 
@@ -26,8 +42,8 @@ class BrandCtrl extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-//        DB::beginTransaction();
-//        try {
+        DB::beginTransaction();
+        try {
             $brand->nameBrand = $request->input('nameBrand');
             $brand->status = $request->input('status', 0);
             $brand->notes = $request->input('notes');
@@ -35,9 +51,9 @@ class BrandCtrl extends Controller
             DB::commit();
 
             return response()->json(['status' => true], 200);
-//        } catch (\Throwable $e) {
-//            DB::rollback();
-//            return response()->json(['errors' => "Can't create brand"], 422);
-//        }
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return response()->json(['errors' => "Can't create brand"], 422);
+        }
     }
 }

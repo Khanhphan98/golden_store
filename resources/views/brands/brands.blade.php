@@ -26,36 +26,43 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <div class="chart-area">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Tên thương hiệu</th>
-                                    <th scope="col">Trạng thái</th>
-                                    <th scope="col">Mô tả</th>
-                                    <th scope="col">Phương thức</th>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tên thương hiệu</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Mô tả</th>
+                                <th scope="col">Phương thức</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(key, value) in data.listBrand">
+                                    <td>@{{ action.showOrder(key) }}</td>
+                                    <td>@{{ value.nameBrand }}</td>
+                                    <td>@{{ action.checkStatus(value.status) }}</td>
+                                    <td class="wrapper-content">
+                                        <p>@{{ value.notes }}</p>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger" ng-click="action.deleteBrand(value.id, value.nameBrand)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="(key, value) in data.listBrand">
-                                        <td>1</td>
-                                        <td>@{{ value.nameBrand }}</td>
-                                        <td>@{{ action.checkStatus(value.status) }}</td>
-                                        <td class="wrapper-content">
-                                            <p>@{{ value.notes }}</p>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-success" ng-click="action.showEditBrandModal()">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            </tbody>
+                        </table>
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <ul class="pagination">
+                                    <div paging page="data.paging.current_page" page-size="data.paging.per_page" total="data.paging.total"
+                                         paging-action="action.changePage(page)">
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
