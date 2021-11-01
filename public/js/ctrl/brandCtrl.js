@@ -41,7 +41,7 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService) {
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
         },
         deleteBrand: (brandID, brandName) => {
-            
+
     }
     }
 
