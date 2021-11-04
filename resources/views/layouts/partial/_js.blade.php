@@ -31,6 +31,7 @@
 <script src="{{ url('') }}/js/factory/userRole.js"></script>
 <script src="{{ url('') }}/js/factory/myFile.js"></script>
 <script src="{{ url('') }}/js/factory/typeConfig.js"></script>
+<script src="{{ url('') }}/js/factory/myNotifies.js"></script>
 
 {{-- Controller --}}
 <script src="{{ url('') }}/js/ctrl/loginCtrl.js"></script>

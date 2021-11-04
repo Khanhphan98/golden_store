@@ -6,3 +6,6 @@
 
 <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+{{-- angular css --}}
+<link href="{{ asset('js/angular/angular-notify/angular-notify.css') }}" rel="stylesheet">

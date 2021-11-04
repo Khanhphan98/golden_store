@@ -7,6 +7,7 @@
     <script src="{{ url('') }}/js/directives/modal/createBrandModal.js"></script>
     {{--  Ctrl  --}}
     <script src="{{ url('') }}/js/ctrl/brandCtrl.js"></script>
+
 @endsection()
 
 @section('content')

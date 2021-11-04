@@ -1,4 +1,4 @@
-ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService) {
+ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myNotifies, notify) {
     $scope.data = {
         listBrand: [],
         page: 1,
@@ -41,11 +41,19 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService) {
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
         },
         deleteBrand: (brandID, brandName) => {
-            $brandService.action.deleteBrand(brandID).then((res) => {
-                $scope.process.listBrand();
-            }).catch((err) => {
-                console.error(err);
-            });
+            // $brandService.action.deleteBrand(brandID).then((res) => {
+            //     $scope.process.listBrand();
+            // }).catch((err) => {
+            //     console.error(err);
+            // });
+            $myNotifies.success('Xoá thương hiệu thành công' ,notify);
+
+            let check = confirm('Bạn có chắc muốn xoá thương hiệu ' + brandName + ' này không?');
+            if (check) {
+                console.log(check);
+            } else {
+                console.log(check);
+            }
         }
     }
 
