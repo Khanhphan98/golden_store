@@ -56,4 +56,17 @@ class BrandCtrl extends Controller
             return response()->json(['errors' => "Can't create brand"], 422);
         }
     }
+
+    public function deleteBrand(Brand $brand, $brandID){
+        $brands = $brand->find($brandID)->products;
+        if (count($brands) > 0) {
+            return response()->json(['error' => "Brand cannot be delete"], 422);
+        }
+
+        $brandS = $brand->find($brandID);
+        $brandS->delete();
+
+        return response()->json(['status' => 'Successfully remove the brand'], 200);
+
+    }
 }

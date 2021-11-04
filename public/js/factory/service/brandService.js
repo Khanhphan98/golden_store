@@ -27,6 +27,12 @@ ngApp.factory('$brandService', function ($rootScope, $http, $httpParamSerializer
         return $http.post(url, params);
     }
 
+    // delete brand
+    service.action.deleteBrand = function (id) {
+        let url = SiteUrl + '/rest/deleteBrand/' + id;
+        return $http.delete(url);
+    }
+
 
 
     return service;

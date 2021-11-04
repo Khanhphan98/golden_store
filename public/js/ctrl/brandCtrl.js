@@ -41,8 +41,12 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService) {
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
         },
         deleteBrand: (brandID, brandName) => {
-
-    }
+            $brandService.action.deleteBrand(brandID).then((res) => {
+                $scope.process.listBrand();
+            }).catch((err) => {
+                console.error(err);
+            });
+        }
     }
 
     $scope.process.listBrand();

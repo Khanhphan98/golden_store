@@ -56,15 +56,13 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     // Brand
     Route::get('listBrand', 'Rest\BrandCtrl@listBrand')->name('listBrand');
     Route::post('createBrand', 'Rest\BrandCtrl@createBrand')->name('createBrand');
+    Route::delete('deleteBrand/{id}', 'Rest\BrandCtrl@deleteBrand');
+
+
 
     // Category
     Route::get('/listCategory', 'Rest\CategoriesCtrl@listCategory')->name('listCategory');
     Route::get('/selectListCategory', 'Rest\CategoriesCtrl@selectListCategory')->name('selectListCategory');
     Route::post('/createCategory', 'Rest\CategoriesCtrl@createCategory')->name('createCategory');
 
-    Route::post("upload/file", "Rest\FilesController@upload");
-
-    Route::get('file/list','Rest\FilesController@listFiles');
-
-    Route::post("delete/file", 'Rest\FilesController@delete');
 });
