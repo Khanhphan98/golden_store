@@ -1,4 +1,5 @@
-ngApp.directive('createBrandModal', function ($apply, $myLoader, $myNotify, $typeConfig, $brandService) {
+ngApp.directive('createBrandModal', function ($apply, $myLoader, $myNotify, $typeConfig,
+                                              $brandService, notify, $myNotifies) {
     var templateUrl = SiteUrl + "/render/modal/insertBrandModal";
     var restrict = 'E';
     var scope = {
@@ -9,11 +10,9 @@ ngApp.directive('createBrandModal', function ($apply, $myLoader, $myNotify, $typ
     var link = function (scope) {
 
         scope.data = {
-
             runBrandModal: () => {
                 scope.data.configStatus = $typeConfig.configStatus;
             },
-
         }
 
         scope.action = {
@@ -23,11 +22,11 @@ ngApp.directive('createBrandModal', function ($apply, $myLoader, $myNotify, $typ
                     status: scope.data.status,
                     notes: scope.data.notes
                 }
-                console.log(params);
                 $brandService.action.createBrand(params).then((res) => {
-                    console.log(res);
+                    $myNotifies.success(res.data.status, notify);
+                    scope.retFunc();
                 }).catch((err) => {
-                    console.log(err);
+                    $myNotifies.error(err.data.error, notify);
                 });
             }
         };

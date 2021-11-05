@@ -16,11 +16,10 @@
 <script src="{{url('')}}/js/plugin/moment.js"></script>
 {{-- parsley --}}
 <script src="{{url('')}}/js/plugin/parsley/parsley.min.js"></script>
-
+{{-- Bootstrap --}}
+<script src="{{url('')}}/js/demo/bootstrap.min.js"></script>
 {{-- startbootstrap --}}
 <script src="{{url('')}}/js/plugin/moment.js"></script>
-{{-- Bootstrap core JavaScript --}}
-<script src="{{url('')}}/vendor/jquery/jquery.min.js"></script>
 {{-- Core plugin JavaScript --}}
 <script src="{{url('')}}/vendor/jquery-easing/jquery.easing.min.js"></script>
 {{--Custom scripts for all pages--}}

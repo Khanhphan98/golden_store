@@ -1,4 +1,4 @@
-ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myNotifies, notify) {
+ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myNotify, $myNotifies, notify, $myBootbox) {
     $scope.data = {
         listBrand: [],
         page: 1,
@@ -11,7 +11,6 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myN
             let params = $brandService.data.listBrand($scope.data.page, $scope.data.perPage, $scope.data.keyword);
 
             $brandService.action.listBrand(params).then((res) => {
-                console.log(res);
                 $scope.data.listBrand = res.data.listBrand.data;
                 $scope.data.paging.current_page = res.data.listBrand.current_page;
                 $scope.data.paging.per_page = res.data.listBrand.per_page;
@@ -41,19 +40,20 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myN
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
         },
         deleteBrand: (brandID, brandName) => {
-            // $brandService.action.deleteBrand(brandID).then((res) => {
-            //     $scope.process.listBrand();
-            // }).catch((err) => {
-            //     console.error(err);
-            // });
-            $myNotifies.success('Xoá thương hiệu thành công' ,notify);
-
-            let check = confirm('Bạn có chắc muốn xoá thương hiệu ' + brandName + ' này không?');
-            if (check) {
-                console.log(check);
-            } else {
-                console.log(check);
-            }
+            $myBootbox.confirm(`Bạn có chắc chắn muốn xoá Thương hiệu <b>` + brandName + `</b> này không?`, function (result) {
+                if (result) {
+                    $brandService.action.deleteBrand(brandID).then((res) => {
+                        $scope.process.listBrand();
+                        $myNotifies.success(res.data.status, notify);
+                    }).catch((err) => {
+                        $myNotifies.error(err.data.error, notify);
+                    });
+                }
+            })
+        },
+        closeModal: () => {
+            $($scope.domBrandModal).modal('hide');
+            $scope.process.listBrand();
         }
     }
 
