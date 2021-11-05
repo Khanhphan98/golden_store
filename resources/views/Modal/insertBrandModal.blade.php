@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Tạo thương hiệu</h5>
+                <h5 class="modal-title" id="myModalLabel">@{{ data.titleModel }}</h5>
             </div>
             <div class="modal-body" style="">
                 <form id="form-brand" class="form-horizontal" data-parsley-validate enctype="multipart/form-data">
@@ -12,9 +12,9 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Trạng thái</label>
-                        <select name="status" id="status" class="form-control" ng-model="data.status">
+                        <select id="status" class="form-control" ng-model="data.status">
                             <option value="">-- Chọn trạng thái --</option>
-                            <option ng-repeat="(key, status) in data.configStatus" value="@{{ status.value }}">@{{ status.name }}</option>
+                            <option ng-repeat="(key, status) in data.configStatus" ng-value="status.value" value="@{{ status.value }}">@{{ status.name }}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -25,7 +25,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button ng-click="action.createBrand()" class="btn btn-primary">Tạo</button>
+                <button ng-click="action.createBrand()" class="btn btn-primary">@{{ data.buttonModel }}</button>
             </div>
         </div>
     </div>

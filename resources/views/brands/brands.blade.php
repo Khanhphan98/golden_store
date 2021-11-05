@@ -13,7 +13,7 @@
     <div ng-controller="brandCtrl">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Thương hiệu</h1>
-            <button ng-click="action.showCreateBrandModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <button ng-click="action.showEditBrandModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Create</button>
         </div>
         <div class="row">
@@ -45,7 +45,7 @@
                                         <p>@{{ value.notes }}</p>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                        <button class="btn btn-success" ng-click="action.showEditBrandModal(value)">
                                             <i class="fa fa-edit"></i>
                                         </button>
                                         <button class="btn btn-danger" ng-click="action.deleteBrand(value.id, value.nameBrand)">
@@ -68,6 +68,6 @@
                 </div>
             </div>
         </div>
-        <create-brand-modal  ret-func="action.closeModal()" modal-dom="domBrandModal"></create-brand-modal>
+        <create-brand-modal brand-data="brandData" ret-func="action.closeModal()" modal-dom="domBrandModal"></create-brand-modal>
     </div>
 @endsection

@@ -29,7 +29,7 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myN
             if (status == 0) {
                 return $typeConfig.configStatus[0].name;
             } else {
-                return $typeConfig.configStatus[0].name;
+                return $typeConfig.configStatus[1].name;
             }
         },
         changePage: (page) => {
@@ -54,6 +54,16 @@ ngApp.controller('brandCtrl', function ($scope, $typeConfig, $brandService, $myN
         closeModal: () => {
             $($scope.domBrandModal).modal('hide');
             $scope.process.listBrand();
+        },
+        showEditBrandModal: (value) => {
+            $($scope.domBrandModal).modal('show');
+            if (value) {
+                $scope.brandData = value;
+            } else {
+                $scope.brandData = {
+                    id: 0
+                }
+            }
         }
     }
 

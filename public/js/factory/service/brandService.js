@@ -5,6 +5,7 @@ ngApp.factory('$brandService', function ($rootScope, $http, $httpParamSerializer
     };
 
     // data
+    // list brand
     service.data.listBrand = (page, perPage, keyword) => {
         return {
             page: page || 1,
@@ -13,6 +14,7 @@ ngApp.factory('$brandService', function ($rootScope, $http, $httpParamSerializer
         }
     }
 
+    // create brand
     service.data.createBrand = (nameBrand, status, notes) => {
         return {
             nameBrand: nameBrand,
@@ -41,6 +43,11 @@ ngApp.factory('$brandService', function ($rootScope, $http, $httpParamSerializer
         return $http.delete(url);
     }
 
+    // update brand
+    service.action.updateBrand = function (params, idBrand) {
+        let url = SiteUrl + '/rest/updateBrand/' + idBrand;
+        return $http.put(url, params);
+    }
 
 
     return service;

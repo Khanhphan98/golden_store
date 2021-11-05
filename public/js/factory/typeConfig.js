@@ -90,11 +90,11 @@ ngApp.factory('$typeConfig', function ($rootScope, $http, $httpParamSerializer) 
             hide: 'password'
         },
         configStatus: {
-            0: {
-                name: 'Hoạt động',
-                value: 0
-            },
             1: {
+                name: 'Hoạt động',
+                value: 1
+            },
+            0: {
                 name: 'Tạm dừng',
                 value: 0
             }

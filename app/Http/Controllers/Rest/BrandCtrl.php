@@ -26,7 +26,7 @@ class BrandCtrl extends Controller
         $page = (int) $request->input('page', 1);
         $perPage = (int) $request->input('perPage', 10);
 
-        $page > 0 ? $listBrand = $brand->paginate($perPage) : $listBrand = $brand->all();
+        $page > 0 ? $listBrand = $brand->orderBy('created_at', 'asc')->paginate($perPage) : $listBrand = $brand->all();
 
         return response()->json(['status' => true, 'listBrand' => $listBrand], 200);
     }
@@ -57,16 +57,48 @@ class BrandCtrl extends Controller
         }
     }
 
+    public function updateBrand(Brand $brand, Request $request, $brandID) {
+        $validator = Validator::make($request->all(), [
+            'nameBrand' => 'required',
+        ], [
+            'nameBrand.required' => 'Brand name is required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $brands = $brand->find($brandID);
+            $brands->nameBrand = $request->input('nameBrand');
+            $brands->status = $request->input('status', 0);
+            $brands->notes = $request->input('notes');
+            $brands->save();
+
+            DB::commit();
+            return response()->json(['status' => 'Cập nhật thương hiệu thành công!'], 200);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return response()->json(['error' => "Không thể cập nhật được thương hiệu!"], 422);
+        }
+    }
+
     public function deleteBrand(Brand $brand, $brandID){
         $brands = $brand->find($brandID)->products;
         if (count($brands) > 0) {
             return response()->json(['error' => "Thương hiệu này không thể xoá!"], 422);
         }
 
-        $brandS = $brand->find($brandID);
-        $brandS->delete();
-
-        return response()->json(['status' => 'Thương hiệu đã xoá thành công!'], 200);
-
+        DB::beginTransaction();
+        try {
+            $brandS = $brand->find($brandID);
+            $brandS->delete();
+            DB::commit();
+            return response()->json(['status' => 'Thương hiệu đã xoá thành công!'], 200);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return response()->json(['error' => "Không thể xoá được thương hiệu!"], 422);
+        }
     }
 }
