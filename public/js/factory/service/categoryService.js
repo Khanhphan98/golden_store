@@ -41,6 +41,5 @@ ngApp.factory('$categoryService', function ($rootScope, $http, $httpParamSeriali
         return $http.post(url, params);
     }
 
-
     return service;
 });

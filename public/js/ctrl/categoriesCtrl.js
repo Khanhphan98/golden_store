@@ -28,9 +28,9 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
         },
         checkStatus: (status) => {
             if (status == 0) {
-                return $typeConfig.configStatus['0'];
+                return $typeConfig.configStatus['0'].name;
             } else {
-                return $typeConfig.configStatus['1'];
+                return $typeConfig.configStatus['1'].name;
             }
         },
         closeModal: () => {

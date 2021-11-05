@@ -15,7 +15,7 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotify, $
 
         scope.process = {
             listCategory: () => {
-                $categoryService.action.listCategory().then((res) => {
+                $categoryService.action.selectListCategory().then((res) => {
                     scope.data.listCategories = res.data.category;
                 }).catch((err) => {
                     console.log(err);
@@ -23,6 +23,7 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotify, $
             },
             runModal: () => {
                 scope.data.configStatus = $typeConfig.configStatus;
+                scope.process.listCategory();
             }
         }
 
@@ -34,6 +35,17 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotify, $
                 }).catch((err) => {
                     console.log(err);
                 });
+            },
+            formatCategory: (nameCategory, path) => {
+                let str = path.split('/');
+                str.shift(); str.pop();
+                let trim = '';
+                if (str.length > 1) {
+                    for (let i = 0; i < str.length; i++) {
+                        trim = trim + '--';
+                    }
+                }
+                return trim + ' ' + nameCategory;
             },
         };
 

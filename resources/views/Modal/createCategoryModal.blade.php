@@ -14,14 +14,15 @@
                         <label for="parentId">Trực thuộc</label>
                         <select name="parentId" id="parentId" class="form-control" ng-model="data.parentId">
                             <option value="">-- Chọn trực thuộc --</option>
-                            <option ng-repeat="(key, value) in data.listCategories" value="@{{ value.id }}">@{{ value.nameCategory }}</option>
+                            <option ng-repeat="(key, value) in data.listCategories" value="@{{ value.id }}">
+                                @{{ action.formatCategory(value.nameCategory, value.path) }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="status">Trạng thái</label>
                         <select name="status" id="status" class="form-control" ng-model="data.status">
                             <option value="">-- Chọn trạng thái --</option>
-                            <option ng-repeat="(key, value) in data.configStatus" value="@{{ key }}">@{{ value }}</option>
+                            <option ng-repeat="(key, status) in data.configStatus" ng-value="status.value" value="@{{ status.value }}">@{{ status.name }}</option>
                         </select>
                     </div>
                 </form>
