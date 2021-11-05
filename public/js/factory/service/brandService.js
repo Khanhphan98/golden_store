@@ -13,6 +13,14 @@ ngApp.factory('$brandService', function ($rootScope, $http, $httpParamSerializer
         }
     }
 
+    service.data.createBrand = (nameBrand, status, notes) => {
+        return {
+            nameBrand: nameBrand,
+            status: status,
+            notes: notes
+        }
+    }
+
 
     // action
     // lít brand

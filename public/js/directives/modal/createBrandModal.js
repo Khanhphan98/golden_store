@@ -17,11 +17,7 @@ ngApp.directive('createBrandModal', function ($apply, $myLoader, $myNotify, $typ
 
         scope.action = {
             createBrand: () => {
-                let params = {
-                    nameBrand: scope.data.nameBrand,
-                    status: scope.data.status,
-                    notes: scope.data.notes
-                }
+                let params = $brandService.data.createBrand(scope.data.nameBrand, scope.data.status, scope.data.notes);
                 $brandService.action.createBrand(params).then((res) => {
                     $myNotifies.success(res.data.status, notify);
                     scope.retFunc();
