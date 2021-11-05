@@ -20,6 +20,7 @@ ngApp.directive('createBrandModal', function ($apply, $myLoader, $myNotify, $typ
                 let params = $brandService.data.createBrand(scope.data.nameBrand, scope.data.status, scope.data.notes);
                 $brandService.action.createBrand(params).then((res) => {
                     $myNotifies.success(res.data.status, notify);
+                    $('#form-brand').trigger("reset");
                     scope.retFunc();
                 }).catch((err) => {
                     $myNotifies.error(err.data.error, notify);

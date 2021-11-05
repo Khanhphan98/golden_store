@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="myModalLabel">Tạo thương hiệu</h5>
             </div>
             <div class="modal-body" style="">
-                <form>
+                <form id="form-brand" class="form-horizontal" data-parsley-validate enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nameBrand">Tên thương hiệu</label>
                         <input type="text" class="form-control" id="nameBrand" ng-model="data.nameBrand" placeholder="Tên thương hiệu">
