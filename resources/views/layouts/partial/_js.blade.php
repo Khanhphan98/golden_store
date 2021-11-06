@@ -5,7 +5,6 @@
 <script src="{{ url('') }}/js/plugin/bootstrap-datepicker.vi.min.js" charset="UTF-8"></script>
 <script src="{{ url('') }}/js/plugin/bootstrap-timepicker.min.js"></script>
 <!-- End JS Date Picker -->
-<script src="{{ url('') }}/js/plugin/parsley/parsley.min.js"></script>
 <script src="{{ url('') }}/js/plugin/parsley/locale/vi.js"></script>
 
 <script src="{{ url('') }}/js/plugin/bootbox.min.js"></script>

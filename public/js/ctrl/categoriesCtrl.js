@@ -66,6 +66,16 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
                    })
                }
             });
+        },
+        showEditCategoryModal: (category) => {
+            $($scope.domCategoryModal).modal('show');
+            if (category){
+                $scope.categoryData = category;
+            } else {
+                $scope.categoryData = {
+                    id: 0
+                }
+            }
         }
     }
 

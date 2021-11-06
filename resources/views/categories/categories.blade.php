@@ -13,7 +13,7 @@
     <div ng-controller="categoriesCtrl">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Loại sản phẩm</h1>
-            <button ng-click="action.showCreateCategoryModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <button ng-click="action.showEditCategoryModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Create</button>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
                                 <td>@{{ action.formatCategory(value.nameCategory, value.path) }}</td>
                                 <td>@{{ action.checkStatus(value.status) }}</td>
                                 <td>
-                                    <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                    <button class="btn btn-success" ng-click="action.showEditCategoryModal(value)">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                     <button class="btn btn-danger" ng-click="action.deleteCategory(value.nameCategory, value.id)">
@@ -64,6 +64,6 @@
                 </div>
             </div>
         </div>
-        <create-category-modal ret-func="action.closeModal()" run-action="data.runAction" modal-dom="domCategoryModal"></create-category-modal>
+        <create-category-modal ret-func="action.closeModal()" category-data="categoryData" run-action="data.runAction" modal-dom="domCategoryModal"></create-category-modal>
     </div>
 @endsection

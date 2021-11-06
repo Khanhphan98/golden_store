@@ -14,8 +14,6 @@
 <script src="{{url('')}}/js/plugin/lodash.js"></script>
 {{-- moment --}}
 <script src="{{url('')}}/js/plugin/moment.js"></script>
-{{-- parsley --}}
-<script src="{{url('')}}/js/plugin/parsley/parsley.min.js"></script>
 {{-- Bootstrap --}}
 <script src="{{url('')}}/js/demo/bootstrap.min.js"></script>
 {{-- startbootstrap --}}
@@ -29,3 +27,5 @@
 {{-- Page level custom scripts --}}
 {{--<script src="{{url('')}}/js/demo/chart-area-demo.js"></script>--}}
 {{--<script src="{{url('')}}/js/demo/chart-pie-demo.js"></script>--}}
+{{-- parsley --}}
+<script src="{{url('')}}/js/plugin/parsley/parsley.min.js"></script>

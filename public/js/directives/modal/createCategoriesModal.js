@@ -4,7 +4,8 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
     var scope = {
         modalDom: '=',
         retFunc: '&',
-        runAction: '&'
+        runAction: '&',
+        categoryData: '='
     };
 
     var link = function (scope) {
@@ -29,14 +30,17 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
 
         scope.action = {
             createCategory: () => {
-                let params = $categoryService.data.createCategory(scope.data.nameCategory, scope.data.parentId, scope.data.status);
-                $categoryService.action.createCategory(params).then((res) => {
-                    $myNotifies.success(res.data.status, notify);
-                    scope.retFunc();
-                }).catch((err) => {
-                    console.log(err);
-                    $myNotifies.error(err.data.error, notify);
-                });
+                if ($('#formCategory').parsley().validate()) {
+                    // let params = $categoryService.data.createCategory(scope.data.nameCategory, scope.data.parentId, scope.data.status);
+                    // $categoryService.action.createCategory(params).then((res) => {
+                    //     $myNotifies.success(res.data.status, notify);
+                    //     scope.retFunc();
+                    // }).catch((err) => {
+                    //     console.log(err);
+                    //     $myNotifies.error(err.data.error, notify);
+                    // });
+                }
+
             },
             formatCategory: (nameCategory, path) => {
                 let str = path.split('/');
@@ -50,6 +54,24 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
                 return trim + ' ' + nameCategory;
             },
         };
+
+        scope.$watch('categoryData', function (newVal, oldVal){
+            if (newVal && newVal.id > 0) {
+                $apply(function () {
+                    scope.data.titleModel = 'Cập nhật loại sản phẩm';
+                    scope.data.btnModel = 'Cập nhật';
+                    scope.data.nameCategory = newVal.nameCategory;
+                    parseInt(newVal.parentId) === 0 ? scope.data.parentId = "" : scope.data.parentId = newVal.parentId;
+                    scope.data.status = newVal.status;
+                })
+            } else {
+                scope.data.titleModel = 'Tạo loại sản phẩm';
+                scope.data.btnModel = 'Tạo';
+                scope.data.nameCategory = '';
+                scope.data.parentId = '';
+                scope.data.status = '';
+            }
+        });
 
         scope.process.runModal();
 
