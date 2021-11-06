@@ -47,5 +47,11 @@ ngApp.factory('$categoryService', function ($rootScope, $http, $httpParamSeriali
         return $http.delete(url);
     }
 
+    // update category
+    service.action.updateCategory = function (params, idCategory) {
+        let url = SiteUrl + '/rest/updateCategory/' + idCategory;
+        return $http.put(url, params);
+    }
+
     return service;
 });

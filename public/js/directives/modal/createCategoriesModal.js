@@ -12,6 +12,7 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
 
         scope.data = {
             listCategories: [],
+            idCategory: ''
         }
 
         scope.process = {
@@ -30,17 +31,23 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
 
         scope.action = {
             createCategory: () => {
-                if ($('#formCategory').parsley().validate()) {
-                    // let params = $categoryService.data.createCategory(scope.data.nameCategory, scope.data.parentId, scope.data.status);
-                    // $categoryService.action.createCategory(params).then((res) => {
-                    //     $myNotifies.success(res.data.status, notify);
-                    //     scope.retFunc();
-                    // }).catch((err) => {
-                    //     console.log(err);
-                    //     $myNotifies.error(err.data.error, notify);
-                    // });
+                let params = $categoryService.data.createCategory(scope.data.nameCategory, scope.data.parentId, scope.data.status);
+                if (scope.data.idCategory > 0) {
+                    $categoryService.action.updateCategory(params, scope.data.idCategory).then((res) => {
+                        $myNotifies.success(res.data.status, notify);
+                        scope.retFunc();
+                    }).catch((err) => {
+                        $myNotifies.error(err.data.error, notify);
+                    })
+                } else {
+                    $categoryService.action.createCategory(params).then((res) => {
+                        $myNotifies.success(res.data.status, notify);
+                        scope.retFunc();
+                    }).catch((err) => {
+                        console.log(err);
+                        $myNotifies.error(err.data.error, notify);
+                    });
                 }
-
             },
             formatCategory: (nameCategory, path) => {
                 let str = path.split('/');
@@ -63,8 +70,10 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
                     scope.data.nameCategory = newVal.nameCategory;
                     parseInt(newVal.parentId) === 0 ? scope.data.parentId = "" : scope.data.parentId = newVal.parentId;
                     scope.data.status = newVal.status;
+                    scope.data.idCategory = newVal.id;
                 })
             } else {
+                scope.data.checkModel = false;
                 scope.data.titleModel = 'Tạo loại sản phẩm';
                 scope.data.btnModel = 'Tạo';
                 scope.data.nameCategory = '';

@@ -118,7 +118,52 @@ class CategoriesCtrl extends Controller
             DB::rollback();
             return response()->json(['error' => $e], 422);
         }
+    }
 
+    public function updateCategory(Categories $categories, Request $request, $idCategory) {
+        $validator = Validator::make($request->all(), [
+            'nameCategory' => 'required',
+            'parentId' => 'required',
+            'status' => 'required',
+        ], [
+            'nameCategory.required' => 'Category name is required',
+            'parentId.required' => 'Category parent ID is required',
+            'status.required' => 'Category status is required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $parentId = $request->input('parentId');
+        $path = '';
+
+        DB::beginTransaction();
+        try {
+            if ($parentId == 0) {
+                $category = $categories->find($idCategory);
+                $categories->nameCategory = $request->input('nameCategory');
+                $categories->path = '/' . $idCategory . '/';
+                $categories->parentId = $request->input('parentId');
+                $categories->status = $request->input('status');
+                $categories->save();
+            } else {
+                $path = $categories->find($parentId)->path;
+
+                $category = $categories->find($idCategory);
+                $category->nameCategory = $request->input('nameCategory');
+                $category->path = $path . $idCategory . '/';
+                $category->parentId = $parentId;
+                $category->status = $request->input('status');
+                $category->save();
+            }
+            DB::commit();
+
+            return response()->json(['status' => 'Cập nhật loại sản phẩm thành công'], 200);
+        } catch (\Exception $e){
+            DB::rollback();
+            return response()->json(['error' => $e], 422);
+        }
 
     }
 }

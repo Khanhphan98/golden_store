@@ -6,6 +6,8 @@
 <script src="{{ url('')}}/js/plugin/underscore-min.js"></script>
 {{--  jquery ui  --}}
 <script src="{{ url('')}}/js/plugin/jquery-ui/jquery-ui.min.js"></script>
+{{-- boostrap bundle --}}
+<script src="{{ url('') }}/js/demo/bootstrap.bundle.js"></script>
 {{-- HLS.js --}}
 <script src="{{url('')}}/js/plugin/hls.min.js"></script>
 {{--  Time picker  --}}
@@ -25,7 +27,7 @@
 {{-- Page level plugins --}}
 <script src="{{url('')}}/vendor/chart.js/Chart.min.js"></script>
 {{-- Page level custom scripts --}}
-{{--<script src="{{url('')}}/js/demo/chart-area-demo.js"></script>--}}
-{{--<script src="{{url('')}}/js/demo/chart-pie-demo.js"></script>--}}
+{{--<script src="{{ url('') }}/js/demo/chart-area-demo.js"></script>--}}
+{{--<script src="{{ url('') }}/js/demo/chart-pie-demo.js"></script>--}}
 {{-- parsley --}}
-<script src="{{url('')}}/js/plugin/parsley/parsley.min.js"></script>
+<script src="{{ url('') }}/js/plugin/parsley/parsley.min.js"></script>
