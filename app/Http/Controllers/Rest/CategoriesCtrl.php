@@ -54,29 +54,36 @@ class CategoriesCtrl extends Controller
         $parentId = $request->input('parentId');
         $path = '';
 
-        if ($parentId == 0) {
-            $category->nameCategory = $request->input('nameCategory');
-            $category->path = $parentId;
-            $category->parentId = $parentId;
-            $category->status = $request->input('status');
-            $category->save();
+        DB::beginTransaction();
+        try {
+            if ($parentId == 0) {
+                $category->nameCategory = $request->input('nameCategory');
+                $category->path = $parentId;
+                $category->parentId = $parentId;
+                $category->status = $request->input('status');
+                $category->save();
 
-            $categoryId = DB::getPdo()->lastInsertId();
-            $this->_updateCategory($category, $request, $categoryId, $path);
+                $categoryId = DB::getPdo()->lastInsertId();
+                $this->_updateCategory($category, $request, $categoryId, $path);
 
-            return response()->json(['status' => true], 200);
-        } else {
+            } else {
+                $path = $category->find($parentId)->path;
+                $category->nameCategory = $request->input('nameCategory');
+                $category->path = $path;
+                $category->parentId = $parentId;
+                $category->status = $request->input('status');
+                $category->save();
 
-            $path = $category->find($parentId)->path;
-            $category->nameCategory = $request->input('nameCategory');
-            $category->path = $path;
-            $category->parentId = $parentId;
-            $category->status = $request->input('status');
-            $category->save();
-
-            $categoryId = DB::getPdo()->lastInsertId();
-            $this->_updateCategory($category, $request, $categoryId, $path);
+                $categoryId = DB::getPdo()->lastInsertId();
+                $this->_updateCategory($category, $request, $categoryId, $path);
+            }
+            DB::commit();
+            return response()->json(['status' => 'Tạo loại sản phẩm thành công'], 200);
+        } catch (\Exception $e){
+            DB::rollback();
+            return response()->json(['error' => $e], 422);
         }
+
     }
 
     public function _updateCategory($category, $request, $categoryId, $path){
@@ -86,5 +93,32 @@ class CategoriesCtrl extends Controller
         $categories->parentId = $request->input('parentId');
         $categories->status = $request->input('status');
         $categories->save();
+    }
+
+    public function deleteCategory(Categories $categories, $idCategory) {
+        $category = $categories->find($idCategory);
+
+        if (empty($category)) {
+            return response()->json(['status' => 'Đơn vị không tồn tại'], 422);
+        }
+
+        $categoryCheck = $categories->checkParentID($idCategory)->get();
+        if (count($categoryCheck) > 0) {
+            return response()->json(['error' => 'Loại sản phẩm còn ràng buộc với các loại sản phẩm con khác'], 422);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $category->delete();
+            DB::commit();
+
+            return response()->json(['status' => 'Xoá loại sản phẩm thành công'], 200);
+        } catch (\Exception $e){
+            DB::rollback();
+            return response()->json(['error' => $e], 422);
+        }
+
+
     }
 }

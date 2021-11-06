@@ -85,6 +85,12 @@ class BrandCtrl extends Controller
     }
 
     public function deleteBrand(Brand $brand, $brandID){
+        $brands = $brand->find($brandID);
+
+        if (empty($brands)) {
+            return response()->json(['status' => 'Thương hiệu này không tồn tại'], 422);
+        }
+
         $brands = $brand->find($brandID)->products;
         if (count($brands) > 0) {
             return response()->json(['error' => "Thương hiệu này không thể xoá!"], 422);

@@ -1,4 +1,4 @@
-ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryService) {
+ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryService, $myBootbox, $myNotifies, notify) {
     $scope.data = {
         listCategories: [],
         page: 1,
@@ -54,6 +54,18 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
         },
         showOrder: (index) => {
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
+        },
+        deleteCategory: (nameCategory, idCategory) => {
+            $myBootbox.confirm(`Bạn có chắc chắn muốn xoá Loại sản phẩm ` + nameCategory + ` này không?`, function(result){
+               if (result) {
+                   $categoryService.action.deleteCategory(idCategory).then((res) => {
+                       $myNotifies.success(res.data.status, notify);
+                       $scope.process.listCategories();
+                   }).catch((e) => {
+                       $myNotifies.error(e.data.error, notify);
+                   })
+               }
+            });
         }
     }
 

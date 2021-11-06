@@ -1,4 +1,4 @@
-ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotify, $typeConfig, $categoryService) {
+ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies, $typeConfig, $categoryService, notify) {
     var templateUrl = SiteUrl + "/render/modal/createCategoryModal";
     var restrict = 'E';
     var scope = {
@@ -31,9 +31,11 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotify, $
             createCategory: () => {
                 let params = $categoryService.data.createCategory(scope.data.nameCategory, scope.data.parentId, scope.data.status);
                 $categoryService.action.createCategory(params).then((res) => {
+                    $myNotifies.success(res.data.status, notify);
                     scope.retFunc();
                 }).catch((err) => {
                     console.log(err);
+                    $myNotifies.error(err.data.error, notify);
                 });
             },
             formatCategory: (nameCategory, path) => {

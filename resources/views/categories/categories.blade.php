@@ -44,7 +44,7 @@
                                     <button class="btn btn-success" ng-click="action.showEditBrandModal()">
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
+                                    <button class="btn btn-danger" ng-click="action.deleteCategory(value.nameCategory, value.id)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </td>

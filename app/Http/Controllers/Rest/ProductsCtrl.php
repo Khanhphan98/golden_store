@@ -40,8 +40,8 @@ class ProductsCtrl extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-//        DB::beginTransaction();
-//        try {
+        DB::beginTransaction();
+        try {
             $itemCode = $this->generateRandomString();
 
             $product->itemName = $request->input('itemName');
@@ -61,13 +61,13 @@ class ProductsCtrl extends Controller
             $productID = DB::getPdo()->lastInsertId();
 
             $this->_updateItem($product, $request, $itemCode, $productID);
-//            DB::commit();
+            DB::commit();
 
             return response()->json(['Create product is successfully'], 200);
-//        } catch (\Throwable $e) {
-//            DB::rollback();
-//            return response()->json(['errors' => $e], 422);
-//        }
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return response()->json(['errors' => $e], 422);
+        }
 
     }
 

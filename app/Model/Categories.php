@@ -19,4 +19,8 @@ class Categories extends Model
     public function scopeOrderByPath($query){
         return $query->orderBy('path', 'asc');
     }
+
+    public function scopeCheckParentID($query, $id){
+        return $query->where('parentId', $id);
+    }
 }
