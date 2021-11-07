@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="myModalLabel">@{{ data.titleModel }}</h5>
             </div>
             <div class="modal-body" style="">
-                <form ng-dom="formCategory" data-parsley-validate enctype="multipart/form-data">
+                <form id="form-category" ng-dom="formCategory" data-parsley-validate enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nameCategory">Tên loại sản phẩm</label>
                         <input type="text" class="form-control" id="nameCategory" ng-model="data.nameCategory" placeholder="Tên loại sản phẩm" required>

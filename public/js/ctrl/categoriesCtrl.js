@@ -11,7 +11,6 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
         listCategories: function () {
             let params = $categoryService.data.listCategory($scope.data.page, $scope.data.perPage, $scope.data.keyword);
             $categoryService.action.listCategory(params).then((res) => {
-                console.log(res);
                 $scope.data.listCategories = res.data.category.data;
                 $scope.data.paging.current_page = res.data.category.current_page;
                 $scope.data.paging.per_page = res.data.category.per_page;

@@ -140,23 +140,30 @@ class CategoriesCtrl extends Controller
 
         DB::beginTransaction();
         try {
+
             if ($parentId == 0) {
                 $category = $categories->find($idCategory);
-                $categories->nameCategory = $request->input('nameCategory');
-                $categories->path = '/' . $idCategory . '/';
-                $categories->parentId = $request->input('parentId');
-                $categories->status = $request->input('status');
-                $categories->save();
-            } else {
-                $path = $categories->find($parentId)->path;
-
-                $category = $categories->find($idCategory);
                 $category->nameCategory = $request->input('nameCategory');
-                $category->path = $path . $idCategory . '/';
+                $category->status   = $request->input('status');
+                $category->path     = '/' . $idCategory . '/';
                 $category->parentId = $parentId;
-                $category->status = $request->input('status');
                 $category->save();
+            } else {
+                $category = $categories->find($idCategory);
+                $categoryS = $categories->find($parentId);
+                $path = $categoryS->path;
+
+                $this->_updateCategories($categories, $idCategory, $request, $path, $parentId);
+                $listCategory = $categories->checkParentID($idCategory)->get();
+                if (count($listCategory) > 0) {
+                    foreach($listCategory as $category) {
+                        $categoryChildren = $categories->find($category->id);
+                        $categoryChildren->path = $path . $idCategory . '/' . $category->id . '/';
+                        $categoryChildren->save();
+                    }
+                }
             }
+
             DB::commit();
 
             return response()->json(['status' => 'Cập nhật loại sản phẩm thành công'], 200);
@@ -165,5 +172,14 @@ class CategoriesCtrl extends Controller
             return response()->json(['error' => $e], 422);
         }
 
+    }
+
+    public function _updateCategories($categories, $idCategory, $request, $path, $parentId){
+        $categoryO = $categories->find($idCategory);
+        $categoryO->nameCategory = $request->input('nameCategory');
+        $categoryO->status   = $request->input('status');
+        $categoryO->path     = $path . $idCategory . '/';
+        $categoryO->parentId = $parentId;
+        $categoryO->save();
     }
 }
