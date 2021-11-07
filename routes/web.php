@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','RenderView\RenderViewController@welcome');
 
 //Auth::routes();
 
@@ -42,8 +40,6 @@ Route::group(['prefix' => 'render', 'middleware' => 'auth'], function () {
     Route::get('brand', 'RenderView\RenderViewController@brand')->name('brand');
 
     Route::get('modal/{modalName}', 'RenderView\RenderViewController@renderModal');
-
-    Route::get('/files', 'Rest\FilesController@files');
 });
 
 Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {

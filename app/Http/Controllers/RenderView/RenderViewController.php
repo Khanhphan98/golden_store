@@ -15,6 +15,10 @@ class RenderViewController extends Controller
         return view('auth.register');
     }
 
+    public function welcome(){
+        return view('welcomes');
+    }
+
     public function items() {
         return view('products.items');
     }

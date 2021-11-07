@@ -10,7 +10,6 @@ ngApp.controller('itemCtrl', function ($scope, $typeConfig, $itemService,  $myNo
         listItem: function () {
             let params =  $itemService.data.listItem($scope.data.page, $scope.data.perPage, $scope.data.keyword);
             $itemService.action.listItem(params).then(function (res) {
-                console.log(res);
                 $scope.data.listItems = res.data.products.data;
                 $scope.data.paging.current_page = res.data.products.current_page;
                 $scope.data.paging.per_page = res.data.products.per_page;
