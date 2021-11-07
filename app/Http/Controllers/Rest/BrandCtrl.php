@@ -31,6 +31,10 @@ class BrandCtrl extends Controller
         return response()->json(['status' => true, 'listBrand' => $listBrand], 200);
     }
 
+    public function selectBrand(Brand $brand){
+        return response()->json(['data' => $brand->all()], 200);
+    }
+
     public function createBrand(Brand $brand, Request $request) {
         $validator = Validator::make($request->all(), [
             'nameBrand' => 'required',

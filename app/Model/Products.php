@@ -18,8 +18,8 @@ class Products extends MyModel
     }
 
     public function scopeFillterProduct($query){
-        return $query->join('brands', 'products.brand_id', '=', 'brands.id')
-            ->join('categories', 'products.category_id', '=', 'categories.id')
+        return $query->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
             ->select('products.*', 'brands.nameBrand', 'categories.nameCategory');
     }
 

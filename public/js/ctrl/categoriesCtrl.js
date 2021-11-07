@@ -55,7 +55,7 @@ ngApp.controller('categoriesCtrl', function ($scope, $typeConfig, $categoryServi
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
         },
         deleteCategory: (nameCategory, idCategory) => {
-            $myBootbox.confirm(`Bạn có chắc chắn muốn xoá Loại sản phẩm ` + nameCategory + ` này không?`, function(result){
+            $myBootbox.confirm(`Bạn có chắc chắn muốn xoá Loại sản phẩm <b>` + nameCategory + `</b> này không?`, function(result){
                if (result) {
                    $categoryService.action.deleteCategory(idCategory).then((res) => {
                        $myNotifies.success(res.data.status, notify);

@@ -63,10 +63,10 @@ class ProductsCtrl extends Controller
             $this->_updateItem($product, $request, $itemCode, $productID);
             DB::commit();
 
-            return response()->json(['Create product is successfully'], 200);
+            return response()->json(['status' => 'Tạo sản phẩm thành công'], 200);
         } catch (\Throwable $e) {
             DB::rollback();
-            return response()->json(['errors' => $e], 422);
+            return response()->json(['error' => $e], 422);
         }
 
     }

@@ -34,16 +34,18 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="category">Loại sản phẩm</label>
-                            <select name="category" id="category" class="form-control" ng-model="data.category">
+                            <select name="category" id="category" class="form-control" ng-model="data.categoryID">
                                 <option value="">-- Loại sản phẩm --</option>
-                                <option ng-repeat="(key, value) in data.listCategory" value="@{{ value.id }}">@{{ value.nameCategory }}</option>
+                                <option ng-repeat="(key, value) in data.listCategory"
+                                        ng-selected="value.id == data.categoryID"
+                                        ng-value="value.id" value="@{{ value.id }}">@{{ process.formatCategory(value.nameCategory, value.path) }}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="brand">Thương hiệu</label>
                             <select name="brand" id="brand" class="form-control" ng-model="data.brand">
                                 <option value="">-- Chọn thương hiệu --</option>
-                                <option ng-repeat="(key, value) in data.listBrand" value="@{{ key }}">@{{ value.nameBrand }}</option>
+                                <option ng-repeat="(key, value) in data.listBrand" value="@{{ value.id }}">@{{ value.nameBrand }}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">

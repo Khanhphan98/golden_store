@@ -49,6 +49,11 @@ ngApp.factory('$brandService', function ($rootScope, $http, $httpParamSerializer
         return $http.put(url, params);
     }
 
+    service.action.selectBrand = function () {
+        let url = SiteUrl + '/rest/selectBrand';
+        return $http.get(url);
+    }
+
 
     return service;
 });

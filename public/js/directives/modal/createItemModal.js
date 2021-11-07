@@ -1,4 +1,4 @@
-ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFile,
+ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFile,  $myNotifies, notify, $myBootbox,
                                              $itemService, $brandService, $categoryService, $typeConfig) {
     var templateUrl = SiteUrl + "/render/modal/createItemModal";
     var restrict = 'E';
@@ -19,8 +19,8 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
 
         scope.process = {
             listBrand: () => {
-                $brandService.action.listBrand().then((res) => {
-                    scope.data.listBrand = res.data.listBrand;
+                $brandService.action.selectBrand().then((res) => {
+                    scope.data.listBrand = res.data.data;
                 }).catch((err) => {
                     console.error(err);
                 });
@@ -43,22 +43,32 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
                 scope.process.listCategories();
                 scope.process.listSexs();
                 scope.process.listSize();
-            }
+            },
+            formatCategory: (nameCategory, path) => {
+                let str = path.split('/');
+                str.shift(); str.pop();
+                let trim = '';
+                if (str.length > 1) {
+                    for (let i = 0; i < str.length; i++) {
+                        trim = trim + '--';
+                    }
+                }
+                return trim + ' ' + nameCategory;
+            },
         }
 
         scope.action = {
             createItem: () => {
-                if ($(scope.formItem).parsley().validate()) {
                     let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
-                        scope.data.size, scope.data.countItems, scope.data.category, scope.data.brand,
+                        scope.data.size, scope.data.countItems, scope.data.categoryID, scope.data.brand,
                         scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
                     $itemService.action.createItem(params).then((res) => {
                         scope.retFunc();
-                        console.log(res);
+                        $myNotifies.success(res.data.status, notify);
                     }).catch((e) => {
                         console.log(e);
+                        $myNotifies.error(e.data.error, notify);
                     });
-                }
             },
             loadImage: function (params) {
                 return $myFile.avatar(params);

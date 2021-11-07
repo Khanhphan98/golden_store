@@ -51,7 +51,9 @@
                             <tbody>
                                 <tr ng-repeat="(key, item) in data.listItems">
                                     <th scope="row">@{{ action.showOrder(key) }}</th>
-                                    <td>@{{ item.itemName }}</td>
+                                    <td class="wrapper-content">
+                                        <p style="width: 200px">@{{ item.itemName }}</p>
+                                    </td>
                                     <td>@{{ item.itemCode }}</td>
                                     <td>@{{ item.newPrice }}</td>
                                     <td>@{{ item.nameCategory }}</td>
