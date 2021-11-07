@@ -16,7 +16,7 @@ class RenderViewController extends Controller
     }
 
     public function welcome(){
-        return view('welcomes');
+        return view('welcomes.partial.contentWelcome');
     }
 
     public function items() {
