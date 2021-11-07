@@ -1,3 +1,4 @@
-#welcome{
-    color: #111;
+#background-slide {
+    background-image: url(../img/gallery/header-bg.png);
+    background-size:cover;
 }

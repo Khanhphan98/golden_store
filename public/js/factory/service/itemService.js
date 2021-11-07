@@ -38,20 +38,25 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
 
     // create item
     service.action.createItem = function (params) {
-        var config = {
+        let config = {
             headers: {
                 'Content-Type': undefined,
                 'processData': false,
                 'contentType': false
             }
         };
-        var url = SiteUrl + '/rest/createItem';
+        let url = SiteUrl + '/rest/createItem';
         return $http.post(url, params, config);
     };
 
 
     service.action.listItem = function (params) {
-        var url = SiteUrl + '/rest/listItem?' + $httpParamSerializer(params);
+        let url = SiteUrl + '/rest/listItem?' + $httpParamSerializer(params);
+        return $http.get(url);
+    }
+
+    service.action.listItems = function () {
+        let url = SiteUrl + '/render/listItems';
         return $http.get(url);
     }
 

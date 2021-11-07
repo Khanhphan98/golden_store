@@ -35,41 +35,39 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <div class="chart-area">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col">Mã sản phẩm</th>
-                                    <th scope="col">Giá tiền</th>
-                                    <th scope="col">Loại sản phẩm</th>
-                                    <th scope="col">Thương hiệu</th>
-                                    <th scope="col">Phương thức</th>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Mã sản phẩm</th>
+                                <th scope="col">Giá tiền</th>
+                                <th scope="col">Loại sản phẩm</th>
+                                <th scope="col">Thương hiệu</th>
+                                <th scope="col">Phương thức</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(key, item) in data.listItems">
+                                    <th scope="row">@{{ action.showOrder(key) }}</th>
+                                    <td class="wrapper-content">
+                                        <p style="width: 200px">@{{ item.itemName }}</p>
+                                    </td>
+                                    <td>@{{ item.itemCode }}</td>
+                                    <td>@{{ item.newPrice }}</td>
+                                    <td>@{{ item.nameCategory }}</td>
+                                    <td>@{{ item.nameBrand }}</td>
+                                    <td>
+                                        <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="(key, item) in data.listItems">
-                                        <th scope="row">@{{ action.showOrder(key) }}</th>
-                                        <td class="wrapper-content">
-                                            <p style="width: 200px">@{{ item.itemName }}</p>
-                                        </td>
-                                        <td>@{{ item.itemCode }}</td>
-                                        <td>@{{ item.newPrice }}</td>
-                                        <td>@{{ item.nameCategory }}</td>
-                                        <td>@{{ item.nameBrand }}</td>
-                                        <td>
-                                            <button class="btn btn-success" ng-click="action.showEditBrandModal()">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                         <div class="col-md-12">
                             <div class="text-center">
                                 <ul class="pagination">

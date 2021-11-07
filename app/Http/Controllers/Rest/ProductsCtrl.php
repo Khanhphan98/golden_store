@@ -136,4 +136,8 @@ class ProductsCtrl extends Controller
 
         return $path;
     }
+
+    public function listItems(Products $products) {
+        return response()->json(['products' => $products->all()], 200);
+    }
 }

@@ -33,7 +33,7 @@ Route::get('/callback/{provider}', 'SocialController@handleProviderCallback');
 Route::group(['prefix' => 'render', 'middleware' => 'auth'], function () {
     // items
     Route::get('items', 'RenderView\RenderViewController@items')->name('items');
-
+    Route::get('listItems', 'Rest\ProductsCtrl@listItems')->name('listItems');
    // categories
     Route::get('category', 'RenderView\RenderViewController@category')->name('category');
    // brands
