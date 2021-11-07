@@ -56,7 +56,6 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     Route::delete('deleteBrand/{id}', 'Rest\BrandCtrl@deleteBrand');
     Route::put('updateBrand/{id}', 'Rest\BrandCtrl@updateBrand')->name('updateBrand');
 
-
     // Category
     Route::get('listCategory', 'Rest\CategoriesCtrl@listCategory')->name('listCategory');
     Route::get('selectListCategory', 'Rest\CategoriesCtrl@selectListCategory')->name('selectListCategory');

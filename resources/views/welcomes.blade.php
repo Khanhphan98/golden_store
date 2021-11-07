@@ -14,7 +14,7 @@
     <!-- Styles -->
     @includeIf('layouts.partial._default_css')
     @includeIf('layouts.partial._css')
-
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     @yield('myCss')
     <script>
         let SiteUrl = '{{ url("/") }}';
@@ -22,13 +22,18 @@
 
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="welcome">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" id="headerWelcome">
+                @includeIf('welcomes._headerWelcome')
+            </div>
+            <div class="col-md-12" id="contentWelcome">
                 <div class="row justify-content-center">
                     @yield('welcome')
                 </div>
-                <div class="design">© 2016 Classy Login Form. All rights reserved | Design by K.P</div>
+            </div>
+            <div class="col-md-12" id="footerWelcome">
+                @includeIf('welcomes._footerWelcome')
             </div>
         </div>
     </div>
