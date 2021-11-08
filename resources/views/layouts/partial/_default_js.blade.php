@@ -30,4 +30,5 @@
 {{--<script src="{{ url('') }}/js/demo/chart-area-demo.js"></script>--}}
 {{--<script src="{{ url('') }}/js/demo/chart-pie-demo.js"></script>--}}
 {{-- parsley --}}
-<script src="{{ url('') }}/js/plugin/parsley/parsley.min.js"></script>
+{{--<script src="{{ url('') }}/js/plugin/parsley/parsley.min.js"></script>--}}
+<script src="{{ url('') }}/js/demo/parsley.js"></script>

@@ -49,7 +49,7 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
         return $http.post(url, params, config);
     };
 
-
+    // list item
     service.action.listItem = function (params) {
         let url = SiteUrl + '/rest/listItem?' + $httpParamSerializer(params);
         return $http.get(url);
@@ -58,6 +58,12 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
     service.action.listItems = function () {
         let url = SiteUrl + '/render/listItems';
         return $http.get(url);
+    }
+
+    // delete item
+    service.action.deleteItem = function (idItem) {
+        let url = SiteUrl + '/rest/deleteItem/' + idItem;
+        return $http.delete(url);
     }
 
     return service;

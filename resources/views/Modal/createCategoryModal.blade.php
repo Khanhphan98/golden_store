@@ -16,6 +16,7 @@
                             <option value="">-- Chọn trực thuộc --</option>
                             <option ng-repeat="(key, category) in data.listCategories"
                                     ng-value="category.id" value="@{{ category.id }}"
+                                    ng-show="category.id != data.idCategory"
                                     ng-selected="category.id == data.parentId" >
                                 @{{ action.formatCategory(category.nameCategory, category.path) }}
                             </option>
@@ -31,7 +32,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button ng-click="action.createCategory()" data-dismiss="modal" class="btn btn-primary">@{{ data.btnModel }}</button>
+                <button ng-click="action.createCategory()" type="submit" class="btn btn-primary">@{{ data.btnModel }}</button>
                 <button class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>

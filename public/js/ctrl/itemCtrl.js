@@ -34,6 +34,28 @@ ngApp.controller('itemCtrl', function ($scope, $typeConfig, $itemService,  $myNo
         },
         showOrder: (index) => {
             return (index + 1 + ($scope.data.page - 1) * $scope.data.perPage);
+        },
+        deleteItem: (itemName, idItem) => {
+            $myBootbox.confirm(`Bạn có chắc chắn muốn xoá Sản phẩm <b>` + itemName + `</b> này không?`, function (result) {
+                if (result) {
+                    $itemService.action.deleteItem(idItem).then((res) => {
+                        $myNotifies.success(res.data.status, notify);
+                        $scope.process.listItem();
+                    }).catch((err) => {
+                        $myNotifies.error(err.data.error, notify);
+                    })
+                }
+            })
+        },
+        showEditItemModal: (item) => {
+            $($scope.domItemModal).modal('show');
+            if (item) {
+                $scope.itemData = item;
+            } else {
+                $scope.itemData = {
+                    id: 0
+                }
+            }
         }
     }
 

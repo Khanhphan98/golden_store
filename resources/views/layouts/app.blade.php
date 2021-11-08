@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Tiệm Vàng') }}</title>
+    <title>@yield('pageTitle')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -22,7 +22,7 @@
     @includeIf('layouts.partial._css')
     @yield('myCss')
     <script>
-        var SiteUrl = '{{url("/")}}';
+        var SiteUrl = '{{ url("/") }}';
     </script>
 
 </head>

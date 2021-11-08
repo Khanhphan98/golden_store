@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'TK - Quản lý thương hiệu')
+
 @section('myJs')
     {{--  Service  --}}
     <script src="{{ url('') }}/js/factory/service/brandService.js"></script>

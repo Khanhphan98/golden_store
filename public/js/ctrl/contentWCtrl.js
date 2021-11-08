@@ -18,7 +18,12 @@ ngApp.controller('contentWCtrl', function ($scope, $typeConfig, $itemService,  $
     }
 
     $scope.action = {
-
+        formatImage: (listImages) => {
+            return SiteUrl + '/images/' + listImages;
+        },
+        getList: () => {
+            $scope.process.listItem();
+        }
     }
 
     $scope.process.listItem();

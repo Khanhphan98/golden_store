@@ -4,7 +4,8 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
     var restrict = 'E';
     var scope = {
         modalDom: '=',
-        retFunc: '&'
+        retFunc: '&',
+        itemData: '='
     };
 
     var link = function (scope) {
@@ -14,7 +15,9 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
             listCategory: [],
             listSex: [],
             listSizes: [],
-            status: 0
+            status: 0,
+            btnModel: 'Tạo',
+            titleModel: 'Tạo sản phẩm'
         }
 
         scope.process = {
@@ -60,7 +63,7 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
         scope.action = {
             createItem: () => {
                     let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
-                        scope.data.size, scope.data.countItems, scope.data.categoryID, scope.data.brand,
+                        scope.data.size, scope.data.countItems, scope.data.categoryID, scope.data.brandID,
                         scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
                     $itemService.action.createItem(params).then((res) => {
                         scope.retFunc();
@@ -74,6 +77,33 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
                 return $myFile.avatar(params);
             },
         };
+
+        scope.$watch('itemData', function (newVal, oldVal) {
+            if (newVal && newVal.id > 0) {
+                scope.data.itemName = newVal.itemName;
+                scope.data.newPrice = newVal.newPrice;
+                scope.data.oldPrice = newVal.oldPrice;
+                scope.data.size = newVal.size;
+                scope.data.countItems = newVal.countItems;
+                scope.data.categoryID = newVal.category_id;
+                scope.data.brandID = newVal.brand_id;
+                scope.data.itemSex = newVal.itemSex;
+                scope.data.itemNote = newVal.itemNote;
+                scope.data.uploadfiles = newVal.uploadfiles;
+                scope.data.status = newVal.status;
+
+                scope.data.titleModel = 'Cập nhập sản phẩm';
+                scope.data.btnModel   = 'Cập nhật';
+            } else {
+                $('#form-item')[0].reset();
+                console.log('Tạo sản phẩm')
+                scope.data.titleModel = 'Tạo sản phẩm';
+                scope.data.btnModel   = 'Tạo';
+                scope.data.categoryID = '';
+                scope.data.brandID = '';
+                scope.data.itemSex = '';
+            }
+        })
 
         scope.process.runModal();
 

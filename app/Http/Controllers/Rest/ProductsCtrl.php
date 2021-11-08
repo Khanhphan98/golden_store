@@ -114,6 +114,24 @@ class ProductsCtrl extends Controller
         $products->save();
     }
 
+    public function deleteItem($idItem, Products $products){
+        $item = $products->find($idItem);
+
+        if (empty($item)) {
+            return response()->redirect(['error' => 'Không tìm thấy sản phẩm'], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $item->delete();
+            DB::commit();
+            return response()->json(['status' => 'Xoá sản phẩm thành công!'], 200);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return response()->json(['error' => "Không thể xoá được sản phẩm!"], 422);
+        }
+    }
+
     public function generateRandomString($length = 10) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -138,6 +156,23 @@ class ProductsCtrl extends Controller
     }
 
     public function listItems(Products $products) {
-        return response()->json(['products' => $products->all()], 200);
+        $product = $products->all();
+
+        $listItem = [];
+
+        forEach($product as $key => $value) {
+            $jsonImage = json_decode($value->itemImage, true);
+            if (!empty($jsonImage)) {
+                array_push($listItem, $jsonImage[0]);
+            } else {
+                array_push($listItem, '');
+            }
+            $value->itemImage = $listItem[$key];
+        }
+
+
+        return response()->json(['products' => $product], 200);
     }
+
+
 }

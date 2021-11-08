@@ -47,6 +47,7 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
                         $myNotifies.error(err.data.error, notify);
                     });
                 }
+
             },
             formatCategory: (nameCategory, path) => {
                 let str = path.split('/');
@@ -65,13 +66,12 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
             scope.process.listCategory();
             if (newVal && newVal.id > 0) {
                 $apply(function () {
-                    console.log(newVal);
-                    scope.data.titleModel = 'Cập nhật loại sản phẩm';
-                    scope.data.btnModel = 'Cập nhật';
+                    scope.data.titleModel   = 'Cập nhật loại sản phẩm';
+                    scope.data.btnModel     = 'Cập nhật';
                     scope.data.nameCategory = newVal.nameCategory;
                     parseInt(newVal.parentId) === 0 ? scope.data.parentId = "" : scope.data.parentId = parseInt(newVal.parentId);
-                    scope.data.status = newVal.status;
-                    scope.data.idCategory = newVal.id;
+                    scope.data.status       = newVal.status;
+                    scope.data.idCategory   = newVal.id;
                 })
             } else {
                 try {
@@ -79,9 +79,7 @@ ngApp.directive('createCategoryModal', function ($apply, $myLoader, $myNotifies,
                     scope.data.checkModel = false;
                     scope.data.titleModel = 'Tạo loại sản phẩm';
                     scope.data.btnModel = 'Tạo';
-                    scope.data.nameCategory = '';
-                    scope.data.parentId = '';
-                    scope.data.status = '';
+                    $('#form-category')[0].reset();
                 } catch (e) {
 
                 }

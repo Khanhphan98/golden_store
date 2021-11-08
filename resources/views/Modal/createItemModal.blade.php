@@ -3,10 +3,10 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Tạo sản phẩm</h5>
+                <h5 class="modal-title" id="myModalLabel">@{{ data.titleModel }}</h5>
             </div>
             <div class="modal-body" style="">
-                <form enctype="multipart/form-data" method="POST" role="form" ng-dom="formItem" data-parsley-validate>
+                <form enctype="multipart/form-data" method="POST" role="form" id="form-item" ng-dom="formItem" data-parsley-validate>
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -43,9 +43,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="brand">Thương hiệu</label>
-                            <select name="brand" id="brand" class="form-control" ng-model="data.brand">
+                            <select name="brand" id="brand" class="form-control" ng-model="data.brandID">
                                 <option value="">-- Chọn thương hiệu --</option>
-                                <option ng-repeat="(key, value) in data.listBrand" value="@{{ value.id }}">@{{ value.nameBrand }}</option>
+                                <option ng-repeat="(key, value) in data.listBrand"
+                                        ng-selected="value.id == data.brandID"
+                                        ng-value="value.id" value="@{{ value.id }}">@{{ value.nameBrand }}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -71,7 +73,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button ng-click="action.createItem()" class="btn btn-primary">Tạo</button>
+                <button ng-click="action.createItem()" class="btn btn-primary">@{{ data.btnModel }}</button>
             </div>
         </div>
     </div>

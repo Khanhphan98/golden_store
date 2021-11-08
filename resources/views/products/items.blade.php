@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'TK - Quản lý sản phẩm')
+
 @section('myCss')
     <link href="{{ asset('css/uploadFile.css') }}" rel="stylesheet">
 @endsection()
@@ -19,7 +21,7 @@
     <div ng-controller="itemCtrl">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Sản phẩm</h1>
-            <button ng-click="action.showCreateItemModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <button ng-click="action.showEditItemModal()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Create</button>
         </div>
         <div class="row">
@@ -58,10 +60,10 @@
                                     <td>@{{ item.nameCategory }}</td>
                                     <td>@{{ item.nameBrand }}</td>
                                     <td>
-                                        <button class="btn btn-success" ng-click="action.showEditBrandModal()">
+                                        <button class="btn btn-success" ng-click="action.showEditItemModal(item)">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <button class="btn btn-danger" ng-click="action.showEditBrandModal()">
+                                        <button class="btn btn-danger" ng-click="action.deleteItem(item.itemName, item.id)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -81,6 +83,6 @@
                 </div>
             </div>
         </div>
-        <create-item-modal ret-func="action.closeModal()" modal-dom="domItemModal"></create-item-modal>
+        <create-item-modal item-data="itemData" ret-func="action.closeModal()" modal-dom="domItemModal"></create-item-modal>
     </div>
 @endsection
