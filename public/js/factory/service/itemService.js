@@ -66,6 +66,20 @@ ngApp.factory('$itemService', function ($rootScope, $http, $httpParamSerializer,
         return $http.delete(url);
     }
 
+    // update item
+    service.action.updateItem = function (params, itemID) {
+        let config = {
+            headers: {
+                'Content-Type': undefined,
+                'processData': false,
+                'contentType': false
+            }
+        };
+        let url = SiteUrl + '/rest/updateItem/' + itemID;
+        return $http.post(url, params, config);
+    }
+
+
     return service;
 });
 

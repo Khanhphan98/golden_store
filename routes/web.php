@@ -49,6 +49,7 @@ Route::group(['prefix' => 'rest', 'middleware' => 'auth'], function() {
     Route::get('listItem', 'Rest\ProductsCtrl@itemsAll')->name('listItem');
     Route::post('createItem', 'Rest\ProductsCtrl@createItem')->name('createItem');
     Route::delete('deleteItem/{id}', 'Rest\ProductsCtrl@deleteItem')->name('deleteItem');
+    Route::post('updateItem/{id}', 'Rest\ProductsCtrl@updateItem')->name('updateItem');
 
     // Brand
     Route::get('listBrand', 'Rest\BrandCtrl@listBrand')->name('listBrand');

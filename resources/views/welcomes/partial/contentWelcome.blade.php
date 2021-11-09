@@ -1,5 +1,9 @@
 @extends('welcomes.app')
 
+@section('myCss')
+    <link rel="stylesheet" href="{{ asset('strip/strip.css') }}">
+@endsection
+
 @section('myJs')
     {{--  Service  --}}
     <script src="{{ url('') }}/js/factory/service/itemService.js"></script>
@@ -8,6 +12,8 @@
     {{--  Directive  --}}
     {{--  Ctrl  --}}
     <script src="{{ url('') }}/js/ctrl/contentWCtrl.js"></script>
+
+    <script src="{{ url('') }}/strip/strip.js"></script>
 @endsection()
 
 @section('welcomes')
@@ -17,152 +23,22 @@
             <div class="container">
                 <div class="row h-100">
                     <div class="col-lg-7 mx-auto text-center mt-7 mb-5">
-                        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Best Deals</h5>
+                        <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Những sản phẩm bán chạy nhất Tháng 10</h5>
                     </div>
                     <div class="col-12">
-                        <button ng-click="action.getList()" class="btn btn-danger">Click</button>
                         <div class="carousel slide" id="carouselBestDeals" data-bs-touch="false" data-bs-interval="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="10000">
-                                    <div class="row h-100 align-items-center g-2">
-                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                                            <div ng-repeat="(key, item) in data.listItems" class="card card-span h-100 text-white">
-                                                <img class="img-fluid h-100" src="@{{ action.formatImage(item.itemImage) }}" alt="..." />
-                                                <div class="card-img-overlay ps-0"></div>
-                                                <div class="card-body ps-0 bg-200">
-                                                    <h5 class="fw-bold text-1000 text-truncate">@{{ item.itemName }}</h5>
-                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">
-                                                            @{{ item.newPrice }}</span><span class="text-primary">
-                                                            @{{ item.oldPrice }}</span>
-                                                    </div>
-                                                </div><a class="stretched-link" href="#"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-{{--                                <div class="carousel-item" data-bs-interval="5000">--}}
-{{--                                    <div class="row h-100 align-items-center g-2">--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/flat-hill.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/blue-ring.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/wallet.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/wrist-watch.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="carousel-item" data-bs-interval="3000">--}}
-{{--                                    <div class="row h-100 align-items-center g-2">--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/flat-hill.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/blue-ring.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/wallet.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/wrist-watch.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="carousel-item">--}}
-{{--                                    <div class="row h-100 align-items-center g-2">--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/flat-hill.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/blue-ring.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/wallet.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">--}}
-{{--                                            <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="{{ asset('img/gallery/wrist-watch.png') }}" alt="..." />--}}
-{{--                                                <div class="card-img-overlay ps-0"> </div>--}}
-{{--                                                <div class="card-body ps-0 bg-200">--}}
-{{--                                                    <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>--}}
-{{--                                                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>--}}
-{{--                                                </div><a class="stretched-link" href="#"></a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-                                <div class="row">
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselBestDeals" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselBestDeals" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next </span></button>
+                            <div class="strip-carousel" id="mostviewed" style="height: 192px; min-height: 192px;">
+                                <div class="arrow-left" style="height: 173.6px; line-height: 163.6px; display: none;">‹</div>
+                                <div class="arrow-right" style="height: 173.6px; line-height: 163.6px; display: none;">›</div>
+
+                                <div class="frames" style="width: 4046px;">
+                                    <a ng-repeat="(key, item) in data.listItems" href="@{{ action.formatImage(item.itemImage) }}">
+                                        <img class="frame" src="@{{ action.formatImage(item.itemImage) }}" style="width: 269px; margin-right: 20px; opacity: 1; pointer-events: auto;"/>
+                                        <span class="txt-strip">
+                                            <span>@{{ item.oldPrice }}</span>
+                                            <span>@{{ item.newPrice }}</span>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

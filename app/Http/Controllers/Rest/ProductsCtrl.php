@@ -118,7 +118,7 @@ class ProductsCtrl extends Controller
         $item = $products->find($idItem);
 
         if (empty($item)) {
-            return response()->redirect(['error' => 'Không tìm thấy sản phẩm'], 422);
+            return response()->json(['error' => 'Không tìm thấy sản phẩm'], 422);
         }
 
         DB::beginTransaction();
@@ -130,6 +130,52 @@ class ProductsCtrl extends Controller
             DB::rollback();
             return response()->json(['error' => "Không thể xoá được sản phẩm!"], 422);
         }
+    }
+
+    public function updateItem(Products $products, Request $request, $itemID){
+        $validator = $this->_validatorItem($request);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $product = $products->find($itemID);
+
+
+        if (empty($product)) {
+            return response()->json(['error' => 'Không tìm thấy sản phẩm'], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $images = [];
+            $product->itemName = $request->input('itemName');
+            $product->newPrice = $request->input('newPrice');
+            $product->oldPrice = $request->input('oldPrice', '');
+            $product->size = $request->input('size', 0);
+            $product->countItems = $request->input('countItems', '');
+            $product->itemSex = $request->input('itemSex', '');
+            $product->itemNote = $request->input('itemNote', '');
+            if ($request->hasFile('itemImage')) {
+                foreach ($request->file('itemImage') as $value) {
+                    $name = $value->getClientOriginalName();
+                    $value->move('images', $name);
+                    array_push($images, $name);
+                }
+                $product->itemImage = json_decode(json_encode($images),true);
+            }
+            $product->category_id = $request->input('category_id');
+            $product->brand_id = $request->input('brand_id');
+            $product->status = $request->input('status', 0);
+            $product->save();
+            DB::commit();
+
+            return response()->json(['status' => 'Cập nhật phẩm thành công'], 200);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return response()->json(['error' => $e], 422);
+        }
+
     }
 
     public function generateRandomString($length = 10) {

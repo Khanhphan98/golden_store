@@ -16,6 +16,7 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
             listSex: [],
             listSizes: [],
             status: 0,
+            itemID: 0,
             btnModel: 'Tạo',
             titleModel: 'Tạo sản phẩm'
         }
@@ -62,9 +63,17 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
 
         scope.action = {
             createItem: () => {
-                    let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
-                        scope.data.size, scope.data.countItems, scope.data.categoryID, scope.data.brandID,
-                        scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
+                let params = $itemService.data.createItem(scope.data.itemName, scope.data.newPrice, scope.data.oldPrice,
+                    scope.data.size, scope.data.countItems, scope.data.categoryID, scope.data.brandID,
+                    scope.data.itemSex, scope.data.itemNote, scope.uploadfiles, scope.data.status);
+                if (scope.data.itemID > 0) {
+                    $itemService.action.updateItem(params, scope.data.itemID).then((res) => {
+                        scope.retFunc();
+                        $myNotifies.success(res.data.status, notify);
+                    }).catch((e) => {
+                        $myNotifies.error(e.data.error, notify);
+                    })
+                } else {
                     $itemService.action.createItem(params).then((res) => {
                         scope.retFunc();
                         $myNotifies.success(res.data.status, notify);
@@ -72,6 +81,8 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
                         console.log(e);
                         $myNotifies.error(e.data.error, notify);
                     });
+                }
+
             },
             loadImage: function (params) {
                 return $myFile.avatar(params);
@@ -80,6 +91,7 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
 
         scope.$watch('itemData', function (newVal, oldVal) {
             if (newVal && newVal.id > 0) {
+                scope.data.itemID = newVal.id;
                 scope.data.itemName = newVal.itemName;
                 scope.data.newPrice = newVal.newPrice;
                 scope.data.oldPrice = newVal.oldPrice;
@@ -95,13 +107,18 @@ ngApp.directive('createItemModal', function ($apply, $myLoader, $myNotify, $myFi
                 scope.data.titleModel = 'Cập nhập sản phẩm';
                 scope.data.btnModel   = 'Cập nhật';
             } else {
-                $('#form-item')[0].reset();
-                console.log('Tạo sản phẩm')
-                scope.data.titleModel = 'Tạo sản phẩm';
-                scope.data.btnModel   = 'Tạo';
-                scope.data.categoryID = '';
-                scope.data.brandID = '';
-                scope.data.itemSex = '';
+                try {
+                    $('#form-item')[0].reset();
+                    scope.data.itemID = newVal.id;
+                    scope.data.titleModel = 'Tạo sản phẩm';
+                    scope.data.btnModel   = 'Tạo';
+                    scope.data.size = '';
+                    scope.data.categoryID = '';
+                    scope.data.brandID = '';
+                    scope.data.itemSex = '';
+                } catch (e) {
+
+                }
             }
         })
 
